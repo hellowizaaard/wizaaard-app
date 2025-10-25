@@ -1,3 +1,4 @@
+
 import 'package:bloc/bloc.dart';
 
 import '../../../../data/session_manager/user_prefs_manager.dart';
@@ -12,7 +13,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final bool firstIntro = await prefsManager.isFirstIntroPreview();
         final bool hasToken = await prefsManager.hasToken();
         final token = await prefsManager.getToken();
-        final isAdmin = await prefsManager.isAdmin();
         final userName = await prefsManager.getUserName();
         final designation = await prefsManager.getDesignation();
         final employeeId = await prefsManager.getEmployeeId();
@@ -26,11 +26,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthLoading());
 
         if (firstIntro) {
+          print('first intro is $firstIntro');
           if (hasToken) {
+            print('has intro is $firstIntro');
             emit(AuthAuthorized(
               email: email,
               token: token,
-              isAdmin: isAdmin,
               userName: userName,
               designation: designation,
               employeeId: employeeId,
@@ -41,7 +42,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               // projectCode: projectCode,
             ));
           } else {
+            print('auth intro is $firstIntro');
             emit(AuthUnAuthorized());
+
           }
         } else {
           emit(FirstIntroView());
@@ -54,10 +57,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoggedOut>((event, emit) async {
       prefsManager.deleteToken();
 
-     /* Navigator.of(context).pushAndRemoveUntil(
-        Pages.login as Route<Object?>,
-            (route) => false,
-      );*/
+      // Navigator.of(context).pushAndRemoveUntil(
+      //   Pages.login as Route<Object?>,
+      //       (route) => false,
+      // );
 
       emit(AuthUnAuthorized());
     });

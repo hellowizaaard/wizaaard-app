@@ -35,8 +35,8 @@ class _LoginFormState extends State<LoginForm> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    userPrefsManager.storeFirstIntro(true);
+    print('login screen view');
+    userPrefsManager.storeFirstIntro(false);
   }
 
   bool passToggle = true;

@@ -10,7 +10,6 @@ class MainScreen extends StatefulWidget {
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   static FirebaseAnalyticsObserver observer =
       FirebaseAnalyticsObserver(analytics: analytics);
-  final bool isAdmin;
   final String userName;
   final String designation;
   final String email;
@@ -21,7 +20,6 @@ class MainScreen extends StatefulWidget {
 
   const MainScreen({
     super.key,
-    required this.isAdmin,
     required this.userName,
     required this.designation,
     required this.email,

@@ -15,6 +15,7 @@ import 'package:weebird_app/presentation/business_logic/blocs/login_bloc/login_b
 import 'package:weebird_app/presentation/business_logic/blocs/user_list_bloc/bloc/user_list_bloc_bloc.dart';
 import 'package:weebird_app/presentation/business_logic/blocs/user_logout/user_logout_bloc.dart';
 import 'package:weebird_app/presentation/business_logic/cubits/internet_cubit.dart';
+import 'package:weebird_app/presentation/views/auth/intro_screen.dart';
 import 'package:weebird_app/presentation/views/auth/login_screen.dart';
 import 'package:weebird_app/presentation/views/home/main_screen.dart';
 
@@ -170,7 +171,6 @@ class _MyAppStartState extends State<MyAppStart> {
           builder: (context, state) {
             if (state is AuthAuthorized) {
               return MainScreen(
-                isAdmin: state.isAdmin,
                 userName: state.userName,
                 designation: state.designation,
                 email: state.email,
@@ -181,7 +181,12 @@ class _MyAppStartState extends State<MyAppStart> {
                 // projectCode: state.projectCode,
               );
             }
-            if (state is AuthUnAuthorized) {
+            if(state is FirstIntroView){
+              print('first view ');
+              return IntroPage(key:UniqueKey() , userPrefsManager: widget.userPrefsManager);
+            } else if (state is AuthUnAuthorized) {
+              print('second view ');
+
               return LoginScreen(userPrefsManager: widget.userPrefsManager);
             }
             if (state is AuthLoading) {

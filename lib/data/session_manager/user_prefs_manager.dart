@@ -192,7 +192,12 @@ class UserPrefsManager {
   Future<bool> isFirstIntroPreview() async {
     String? stringValue = await storage.read(key: 'is_first_intro');
     if (stringValue != null) {
-      return stringValue.toLowerCase() == 'true';
+     // return stringValue.toLowerCase() == 'true';
+      if(stringValue.toLowerCase() == 'true'){
+        return true;
+      } else {
+        return false;
+      }
     }
     return false;
   }

@@ -9,7 +9,7 @@ import 'login_screen.dart';
 class IntroPage extends StatefulWidget {
   final UserPrefsManager userPrefsManager;
 
-  IntroPage({required Key key, required this.userPrefsManager})
+  const IntroPage({required Key key, required this.userPrefsManager})
       : super(key: key);
 
   @override

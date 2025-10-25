@@ -13,7 +13,6 @@ class AuthUnAuthorized extends AuthState {}
 
 class AuthAuthorized extends AuthState {
   final String token;
-  final bool isAdmin;
   final String userName;
   final String designation;
   final String employeeId;
@@ -26,7 +25,6 @@ class AuthAuthorized extends AuthState {
 
   AuthAuthorized({
     required this.token,
-    required this.isAdmin,
     required this.userName,
     required this.employeeId,
     required this.notificationEnabled,
@@ -40,11 +38,11 @@ class AuthAuthorized extends AuthState {
 
   @override
   List<Object> get props =>
-      [token, isAdmin, userName, designation, deptName, email, employeeId, role];
+      [token, userName, designation, deptName, email, employeeId, role];
 
   @override
   String toString() =>
-      'LoggedIn { token: $token, user status: $isAdmin, user name: $userName}';
+      'LoggedIn { token: $token, user status:, user name: $userName}';
 }
 
 class FirstIntroView extends AuthState {}

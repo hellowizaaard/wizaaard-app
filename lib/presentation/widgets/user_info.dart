@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weebird_app/presentation/widgets/user_info_details_widget.dart';
 
@@ -7,19 +6,15 @@ import 'appbar_widget.dart';
 
 class UserInfo extends StatelessWidget {
   final userName;
-  final designation;
   final email;
   final deptName;
-  final employeeId;
   final mobile;
 
   const UserInfo({
     super.key,
     required this.userName,
-    required this.designation,
     required this.email,
     required this.deptName,
-    required this.employeeId,
     required this.mobile,
   });
 
@@ -60,10 +55,8 @@ class UserInfo extends StatelessWidget {
                       ),
                     ),
                     UserInfoDetails(info: 'User Name', details: userName),
-                    UserInfoDetails(info: 'Employee Id', details: employeeId),
                     UserInfoDetails(info: 'Mobile No', details: mobile),
                     UserInfoDetails(info: 'Email', details: email),
-                    UserInfoDetails(info: 'Designation', details: designation),
                     UserInfoDetails(
                         info: 'Department Name', details: deptName),
                   ],

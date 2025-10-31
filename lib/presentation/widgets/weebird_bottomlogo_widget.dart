@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
-class DdcCustomWidget extends StatelessWidget {
+class WeebirdCustomWidget extends StatelessWidget {
   final double topPadding;
 
-  const DdcCustomWidget({Key? key, this.topPadding = 0}) : super(key: key);
+  const WeebirdCustomWidget({Key? key, this.topPadding = 0}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,11 @@ class DdcCustomWidget extends StatelessWidget {
         children: <Widget>[
           Text('Designed & Developed by'),
           const SizedBox(width: 8.0),
-          Image.asset('assets/logo/ddc.png'),
+          SvgPicture.asset(
+            'assets/logo/main_logo.svg',
+            height: 10.0,
+            width: 10.0,
+            allowDrawingOutsideViewBox: true),
         ],
       ),
     );

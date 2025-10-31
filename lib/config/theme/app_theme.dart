@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class AppColorTheme {
   static final ThemeData appTheme = ThemeData(
     primarySwatch: AppColors.primary,
-    hintColor: const Color(0xFFEB7867),
-    primaryColor: const Color(0xFFB54D3D),
+    hintColor: const Color(0xFF0062FF),
+    primaryColor: const Color(0xFF003062),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     /*pageTransitionsTheme: PageTransitionsTheme(builders: {
         TargetPlatform.android: CustomPageTransitionBuilder(),
@@ -27,8 +27,8 @@ class AppColorTheme {
     dividerColor: Colors.black,
   );
 
-  static final Color primary = Color(0xFFB54D3D);
-  static final Color secondary = const Color(0xFFEB7867);
+  static final Color primary = Color(0xFF0062FF);
+  static final Color secondary = const Color(0xFF003062);
   static const Color white = Color(0xFFFFFFFF);
   static const Color primary_light = Color(0xFFF8EEEC);
 }
@@ -37,16 +37,16 @@ class AppColors {
   static const MaterialColor primary = MaterialColor(
     0xFF388e3c,
     <int, Color>{
-      50: Color(0xFFEB7867),
-      100: Color(0xFFEB7867),
-      200: Color(0xFFEB7867),
-      300: Color(0xFFEB7867),
-      400: Color(0xFFEB7867),
-      500: Color(0xFFEB7867),
-      600: Color(0xFFEB7867),
-      700: Color(0xFFEB7867),
-      800: Color(0xFFEB7867),
-      900: Color(0xFFEB7867),
+      50: Color(0xFF003062),
+      100: Color(0xFF003062),
+      200: Color(0xFF003062),
+      300: Color(0xFF003062),
+      400: Color(0xFF003062),
+      500: Color(0xFF003062),
+      600: Color(0xFF003062),
+      700: Color(0xFF003062),
+      800: Color(0xFF003062),
+      900: Color(0xFF003062),
     },
   );
 }

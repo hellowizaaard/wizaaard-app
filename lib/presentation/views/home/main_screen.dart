@@ -11,22 +11,16 @@ class MainScreen extends StatefulWidget {
   static FirebaseAnalyticsObserver observer =
       FirebaseAnalyticsObserver(analytics: analytics);
   final String userName;
-  final String designation;
   final String email;
   final String deptName;
-  final String employeeId;
   final String mobile;
-  final String role;
 
   const MainScreen({
     super.key,
     required this.userName,
-    required this.designation,
     required this.email,
     required this.deptName,
-    required this.employeeId,
     required this.mobile,
-    required this.role,
   });
 
   @override
@@ -72,12 +66,9 @@ class _MainScreenState extends State<MainScreen> {
               context,
               badgeCount: 9,
               userName: widget.userName,
-              designation: widget.designation,
               email: widget.email,
               deptName: widget.deptName,
-              employeeId: widget.employeeId,
               mobile: widget.mobile,
-              role: widget.role,
             )
 
         ),

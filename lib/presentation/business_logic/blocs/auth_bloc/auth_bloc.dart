@@ -14,12 +14,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final bool hasToken = await prefsManager.hasToken();
         final token = await prefsManager.getToken();
         final userName = await prefsManager.getUserName();
-        final designation = await prefsManager.getDesignation();
-        final employeeId = await prefsManager.getEmployeeId();
         final email = await prefsManager.getEmail();
         final deptName = await prefsManager.getDepartmentName();
         final mobile = await prefsManager.getMobile();
-        final role = await prefsManager.getLoginType();
         // final projectCode = await prefsManager.getProjectCode();
         final bool notificationEnabled = await prefsManager.hasNotification();
 
@@ -28,21 +25,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (firstIntro) {
           print('first intro is $firstIntro');
           if (hasToken) {
-            print('has intro is $firstIntro');
             emit(AuthAuthorized(
               email: email,
               token: token,
               userName: userName,
-              designation: designation,
-              employeeId: employeeId,
               notificationEnabled: notificationEnabled,
               deptName: deptName,
-              mobile: mobile,
-              role: role
+              mobile: mobile
               // projectCode: projectCode,
             ));
           } else {
-            print('auth intro is $firstIntro');
             emit(AuthUnAuthorized());
 
           }

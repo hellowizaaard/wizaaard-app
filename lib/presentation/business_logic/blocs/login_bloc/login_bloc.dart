@@ -18,9 +18,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         emit(LoginLoading());
 
+
+        // if(event.employeeId == 'test@gmail.com' || event.password == '1234'){
+        //   emit(LoginSuccess(token: 'customz239848sloteions'));
+        // }
+
         if (event.employeeId.isEmpty || event.password.isEmpty) {
           emit(EmptyEntry());
-        } else {
+
+        }
+        else {
           final data =
               await userRepository.userLogin(event.employeeId, event.password);
           if (data.statusCode == 200) {

@@ -7,12 +7,9 @@ import '../../config/theme/app_theme.dart';
 PreferredSize buildAppBarHome(
   BuildContext context, {
   required String userName,
-  required String designation,
   required String email,
   required String deptName,
-  required String employeeId,
   required String mobile,
-  required String role,
   required int badgeCount,
 }) {
   // final bool isDoubleDigit = badgeCount.length >= 2;
@@ -74,10 +71,8 @@ PreferredSize buildAppBarHome(
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => UserInfo(
                         userName: userName,
-                        designation: designation,
                         email: email,
                         deptName: deptName,
-                        employeeId: employeeId,
                         mobile: mobile,
                         // projectCode: projectCode,
                       )));
@@ -105,13 +100,7 @@ PreferredSize buildAppBarHome(
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
-                role,
-                style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.white),
-              ),
+
             ],
           ),
         ),

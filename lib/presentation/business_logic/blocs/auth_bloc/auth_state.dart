@@ -14,31 +14,25 @@ class AuthUnAuthorized extends AuthState {}
 class AuthAuthorized extends AuthState {
   final String token;
   final String userName;
-  final String designation;
-  final String employeeId;
   final bool notificationEnabled;
   final String email;
   final String deptName;
   final String mobile;
-  final String role;
   // final String projectCode;
 
   AuthAuthorized({
     required this.token,
     required this.userName,
-    required this.employeeId,
     required this.notificationEnabled,
-    required this.designation,
     required this.email,
     required this.deptName,
     required this.mobile,
-    required this.role
     // required this.projectCode,
   });
 
   @override
   List<Object> get props =>
-      [token, userName, designation, deptName, email, employeeId, role];
+      [token, userName, deptName, email];
 
   @override
   String toString() =>

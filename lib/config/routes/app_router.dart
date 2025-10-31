@@ -1,4 +1,3 @@
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/session_manager/user_prefs_manager.dart';
@@ -10,7 +9,7 @@ import 'app_page.dart';
 
 class AppRouter {
   Route<dynamic> generateRoute(RouteSettings settings) {
-    FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+   // FirebaseAnalytics analytics = FirebaseAnalytics.instance;
     final UserPrefsManager userPrefsManager = UserPrefsManager();
     // final ChangePasswordRepository repository = ChangePasswordRepository();
     // final ResetPasswordRepository resetRepository = ResetPasswordRepository();

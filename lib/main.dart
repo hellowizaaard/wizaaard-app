@@ -2,8 +2,6 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -18,6 +16,7 @@ import 'package:weebird_app/presentation/business_logic/cubits/internet_cubit.da
 import 'package:weebird_app/presentation/views/auth/intro_screen.dart';
 import 'package:weebird_app/presentation/views/auth/login_screen.dart';
 import 'package:weebird_app/presentation/views/home/main_screen.dart';
+import 'package:flutter/foundation.dart' show kIsWeb, defaultTargetPlatform, TargetPlatform;
 
 import 'config/routes/app_router.dart';
 import 'config/theme/app_theme.dart';
@@ -136,6 +135,7 @@ class _MyAppStartState extends State<MyAppStart> {
     const appcastURL =
         'https://raw.githubusercontent.com/larryaasen/upgrader/master/test/testappcast.xml';
 
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateRoute: _appRouter.generateRoute,
@@ -143,9 +143,11 @@ class _MyAppStartState extends State<MyAppStart> {
         showLater: true,
         showIgnore: true,
         shouldPopScope: () => true,
-        dialogStyle: Platform.isAndroid
-            ? UpgradeDialogStyle.material
-            : UpgradeDialogStyle.cupertino,
+        dialogStyle: kIsWeb
+      ? UpgradeDialogStyle.material // Choose one for web
+          : (defaultTargetPlatform == TargetPlatform.android
+      ? UpgradeDialogStyle.material
+          : UpgradeDialogStyle.cupertino),
         upgrader: Upgrader(
           storeController: UpgraderStoreController(
            // onAndroid: () => UpgraderAppcastStore(appcastURL: appcastURL, osVersion: '1.0.0'),
@@ -171,23 +173,26 @@ class _MyAppStartState extends State<MyAppStart> {
           builder: (context, state) {
             if (state is AuthAuthorized) {
               return MainScreen(
-                userName: state.userName,
-                designation: state.designation,
-                email: state.email,
-                deptName: state.deptName,
-                employeeId: state.employeeId,
-                mobile: state.mobile,
-                role: state.role,
+                userName: 'state.userName',
+                email: 'test@gmail.com',
+                deptName: 'cse',
+                mobile: '01738039685'
                 // projectCode: state.projectCode,
               );
             }
             if(state is FirstIntroView){
-              print('first view ');
               return IntroPage(key:UniqueKey() , userPrefsManager: widget.userPrefsManager);
-            } else if (state is AuthUnAuthorized) {
-              print('second view ');
+            }
+            if (state is AuthUnAuthorized) {
+              //return LoginScreen(userPrefsManager: widget.userPrefsManager);
 
-              return LoginScreen(userPrefsManager: widget.userPrefsManager);
+              return MainScreen(
+                  userName: 'state.userName',
+                  email: 'test@gmail.com',
+                  deptName: 'cse',
+                  mobile: '01738039685'
+                // projectCode: state.projectCode,
+              );
             }
             if (state is AuthLoading) {
               return Scaffold(

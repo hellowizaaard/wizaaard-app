@@ -31,6 +31,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> screens = [
     const HomeScreen(),
     const RoomScreen(),
+    const RoomScreen(),
     const SettingsView(),
   ];
 
@@ -58,19 +59,19 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(70.0),
-        child:
-             buildAppBarHome(
-              context,
-              badgeCount: 9,
-              userName: widget.userName,
-              email: widget.email,
-              deptName: widget.deptName,
-              mobile: widget.mobile,
-            )
-
-        ),
+      // appBar: PreferredSize(
+      //   preferredSize: const Size.fromHeight(70.0),
+      //   child:
+      //        buildAppBarHome(
+      //         context,
+      //         badgeCount: 9,
+      //         userName: widget.userName,
+      //         email: widget.email,
+      //         deptName: widget.deptName,
+      //         mobile: widget.mobile,
+      //       )
+      //
+      //   ),
 
       body:BottomTabbedView(screen: screens)
 

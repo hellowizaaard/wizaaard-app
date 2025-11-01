@@ -5,6 +5,7 @@ class AppColorTheme {
     primarySwatch: AppColors.primary,
     hintColor: const Color(0xFF0062FF),
     primaryColor: const Color(0xFF003062),
+    primaryColorDark: const Color(0xFF000D33),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     /*pageTransitionsTheme: PageTransitionsTheme(builders: {
         TargetPlatform.android: CustomPageTransitionBuilder(),
@@ -28,7 +29,9 @@ class AppColorTheme {
   );
 
   static final Color primary = Color(0xFF0062FF);
-  static final Color secondary = const Color(0xFF003062);
+  static final Color secondary =  Color(0xFF003062);
+  static final Color primaryDark =  Color(0xFF000D33);
+
   static const Color white = Color(0xFFFFFFFF);
   static const Color gray = Color(0xFF999999);
 

@@ -77,14 +77,7 @@ PreferredSize buildAppBarHome(
                         // projectCode: projectCode,
                       )));
             },
-            child: CircleAvatar(
-                radius: 20,
-                backgroundColor: Colors.transparent,
-                // Make the background transparent
-                child: Image.asset(
-                  'assets/logo/user.png',
-                  fit: BoxFit.cover,
-                )),
+
           ),
         ),
         title: Align(

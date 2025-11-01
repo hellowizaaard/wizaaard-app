@@ -7,7 +7,7 @@ import '../../../config/theme/app_theme.dart';
 class BottomTabbedView extends StatefulWidget {
   final List<Widget> screen;
 
-  BottomTabbedView({super.key, required this.screen});
+  const BottomTabbedView({super.key, required this.screen});
 
   @override
   State<BottomTabbedView> createState() => _BottomTabbedViewState(screens: screen);
@@ -24,59 +24,83 @@ class _BottomTabbedViewState extends State<BottomTabbedView> {
       child: Scaffold(
         body: screens[_selectedIndex],
         bottomNavigationBar: Container(
-          color: Colors.white,
+          decoration: BoxDecoration(
+            color: AppColorTheme.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(24),
+              topRight: Radius.circular(24),
+
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 10,
+                offset: const Offset(0, -2),
+              ),
+            ],
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
             child: GNav(
               haptic: true,
-
-              backgroundColor: Colors.white,
-              color: Color(0xff999999),
+              backgroundColor: Colors.transparent, // ✅ transparent for curved bg
+              color: const Color(0xff999999),
               activeColor: AppColorTheme.white,
-              //iconSize: 24,
-              // tab button border
               tabBorderRadius: 12,
               tabBackgroundColor: AppColorTheme.gray,
               gap: 4,
               selectedIndex: _selectedIndex,
-
               tabs: [
                 GButton(
                   icon: Icons.circle,
                   leading: SvgPicture.asset(
-                      'assets/icons/ic_home.svg',
-                      colorFilter: ColorFilter.mode(
-                        _selectedIndex == 0 ? Colors.white : Colors.grey,
-                        BlendMode.srcIn,
-                      ),
+                    'assets/icons/ic_home.svg',
+                    colorFilter: ColorFilter.mode(
+                      _selectedIndex == 0 ? Colors.white : Colors.grey,
+                      BlendMode.srcIn,
+                    ),
                     height: 24,
-                    width: 24),
+                    width: 24,
+                  ),
                   text: 'Home',
                 ),
                 GButton(
                   icon: Icons.circle,
-                  leading: Image.asset(
-                      'assets/icons/ic_resume.svg',
-                      color: _selectedIndex == 1 ? Colors.white : Colors.grey,
-                      height: 24,
-                      width: 24),
+                  leading: SvgPicture.asset(
+                    'assets/icons/ic_resume.svg',
+                    colorFilter: ColorFilter.mode(
+                      _selectedIndex == 1 ? Colors.white : Colors.grey,
+                      BlendMode.srcIn,
+                    ),
+                    height: 24,
+                    width: 24,
+                  ),
                   text: 'Resume',
                 ),
-                 GButton(
+                GButton(
                   icon: Icons.circle,
-                  leading: Image.asset('assets/icons/ic_notification.svg',
-                      color: _selectedIndex == 1 ? Colors.white : Colors.grey,
-                      height: 24,
-                      width: 24),
+                  leading: SvgPicture.asset(
+                    'assets/icons/ic_notification.svg',
+                    colorFilter: ColorFilter.mode(
+                      _selectedIndex == 2 ? Colors.white : Colors.grey,
+                      BlendMode.srcIn,
+                    ),
+                    height: 24,
+                    width: 24,
+                  ),
                   text: 'Notification',
                 ),
-                 GButton(
-                   icon: Icons.circle,
-                   leading: Image.asset(
-                       'assets/icons/ic_settings.svg',
-                       color: _selectedIndex == 1 ? Colors.white : Colors.grey,
-                       height: 24,
-                       width: 24),
+                GButton(
+                  icon: Icons.circle,
+                  leading: SvgPicture.asset(
+                    'assets/icons/ic_settings.svg',
+                    colorFilter: ColorFilter.mode(
+                      _selectedIndex == 3 ? Colors.white : Colors.grey,
+                      BlendMode.srcIn,
+                    ),
+                    height: 24,
+                    width: 24,
+                  ),
                   text: 'Settings',
                 ),
               ],
@@ -88,6 +112,7 @@ class _BottomTabbedViewState extends State<BottomTabbedView> {
             ),
           ),
         ),
+
       ),
     );
   }

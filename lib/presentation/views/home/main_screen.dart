@@ -1,5 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
+import 'package:weebird_app/config/theme/app_theme.dart';
 import '../../widgets/appbar_widget.dart';
 import '../bottom_tab_view/bottom_tabbed_view.dart';
 import '../room/room_screen.dart';
@@ -58,7 +59,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColorTheme.primaryDark,
       // appBar: PreferredSize(
       //   preferredSize: const Size.fromHeight(70.0),
       //   child:

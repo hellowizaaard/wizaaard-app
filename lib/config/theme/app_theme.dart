@@ -31,6 +31,8 @@ class AppColorTheme {
   static final Color primary = Color(0xFF0062FF);
   static final Color secondary =  Color(0xFF003062);
   static final Color primaryDark =  Color(0xFF000D33);
+  static final Color light_gray =  Color(0xFFD3D3D3);
+
 
   static const Color white = Color(0xFFFFFFFF);
   static const Color gray = Color(0xFF999999);

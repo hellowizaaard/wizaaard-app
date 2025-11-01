@@ -82,6 +82,10 @@ flutter:
   assets:
     - assets/logo/ic_logo.svg
     - assets/logo/main_logo.svg
+    - assets/icons/ic_home.svg
+    - assets/icons/ic_resume.svg
+    - assets/icons/ic_settings.svg
+    - assets/icons/ic_notification.svg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

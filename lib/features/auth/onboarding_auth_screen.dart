@@ -17,6 +17,10 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
     "Effortless Resume",
     "Smart Networking",
     "NoCode Biopage",
+    "Flexible Templates",
+    "Flexible Templates",
+    "Connect Right Jobs",
+    "Mentor Guidance"
   ];
 
   final images = [
@@ -24,35 +28,36 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
     "assets/onboard/onboard_2.svg",
     "assets/onboard/onboard_3.svg",
     "assets/onboard/onboard_4.svg",
+    "assets/onboard/onboard_5.svg",
+    "assets/onboard/onboard_6.svg"
   ];
 
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: const Color(0xFFF3F5F9),
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const SizedBox(height: 20),
-
+            SizedBox(height: h * 0.01),
             // Logo
             Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text(
-                  "weebird",
-                  style: GoogleFonts.poppins(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xFF2563EB),
-                  ),
+                child: Image.asset(
+                  'assets/logo/logo.png',
+                  height: 28,
                 ),
               ),
             ),
 
             // Slider
-            Expanded(
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.35,
               child: PageView.builder(
                 controller: _pageController,
                 itemCount: images.length,
@@ -63,12 +68,14 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(
-                        images[index],
-                        height: 260,
-                        fit: BoxFit.contain,
+                      SizedBox(
+                        height: h * 0.25,
+                        child: SvgPicture.asset(
+                          images[index],
+                          fit: BoxFit.fitHeight,
+                        ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: h * 0.015),
                       Text(
                         titles[index],
                         style: GoogleFonts.poppins(
@@ -83,12 +90,11 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
               ),
             ),
 
-
             // Dots Indicator
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                3,
+                images.length,
                     (index) => Container(
                   margin: const EdgeInsets.symmetric(horizontal: 4),
                   width: currentIndex == index ? 10 : 6,
@@ -103,11 +109,13 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
               ),
             ),
 
-            const SizedBox(height: 20),
+
+            // White breathing space
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
 
             // Bottom Card
             Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(24),
               decoration: const BoxDecoration(
                 color: Color(0xFF041C3F),
                 borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
@@ -115,11 +123,9 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
               child: Column(
                 children: [
                   _inputField(),
-                  const SizedBox(height: 15),
+                  SizedBox(height: h * 0.02),
                   _startButton(),
-                  const SizedBox(height: 15),
-
-                  const SizedBox(height: 20),
+                  SizedBox(height: h * 0.2),
                   _loginRegisterSwitch(),
                 ],
               ),
@@ -162,7 +168,6 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
       ),
     );
   }
-
 
   Widget _loginRegisterSwitch() {
     return Container(

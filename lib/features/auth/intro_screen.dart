@@ -34,7 +34,7 @@ class _IntroPageState extends State<IntroPage> {
       titleWidget: Column(
         children: <Widget>[
           Text(
-            'FREE GIFT',
+            'Effortless Resume',
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
           ),
           SizedBox(
@@ -51,7 +51,7 @@ class _IntroPageState extends State<IntroPage> {
       ),
       body:
           "Free gifts with purchase. Offer free gifts like a gift wrap, gift card, or any free product.",
-      image: Center(child: SvgPicture.asset("assets/icons/gift.svg")),
+      image: Center(child: SvgPicture.asset("assets/onboard/onboard_1.svg")),
       decoration: const PageDecoration(
           pageColor: Colors.white,
           bodyTextStyle: TextStyle(
@@ -65,7 +65,7 @@ class _IntroPageState extends State<IntroPage> {
       titleWidget: Column(
         children: <Widget>[
           Text(
-            'PAYMENT INTEGRATION',
+            'Smart Networking',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 18.0,
@@ -89,7 +89,7 @@ class _IntroPageState extends State<IntroPage> {
       image: Center(
           child: SizedBox(
         width: 450.0,
-        child: SvgPicture.asset("assets/icons/payment.svg"),
+        child: SvgPicture.asset("assets/onboard/onboard_2.svg"),
       )),
       decoration: const PageDecoration(
           pageColor: Colors.white,
@@ -104,7 +104,7 @@ class _IntroPageState extends State<IntroPage> {
       titleWidget: Column(
         children: <Widget>[
           Text(
-            'CALL CENTER',
+            'NoCode Biopage',
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
           ),
           SizedBox(
@@ -124,7 +124,7 @@ class _IntroPageState extends State<IntroPage> {
       image: Center(
           child: SizedBox(
         width: 450.0,
-        child: SvgPicture.asset("assets/icons/call.svg"),
+        child: SvgPicture.asset("assets/onboard/onboard_3.svg"),
       )),
       decoration: const PageDecoration(
           pageColor: Colors.white,

@@ -108,7 +108,7 @@ class _MyWidgetState extends State<HomeScreen> {
             ),
 
           const SizedBox(height: 24),
-          buildWelcomeText("Ramananda Sarkar"),
+          buildWelcomeText("Mohammad Asadul"),
           const SizedBox(height: 16),
           // 🔹 Subtitle Text
           const Text(
@@ -339,46 +339,49 @@ class _MyWidgetState extends State<HomeScreen> {
 
 
   Widget _buildHeader() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const Text(
-          'My Resume',
-          style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
+    return Container(
+      margin: EdgeInsets.only(left: 12.0, right: 12.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            'My Resume',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        Expanded(
-          child: Center(
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
-                elevation: 0,
-                padding:
-                const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  side: const BorderSide(color: Colors.black12),
+          Expanded(
+            child: Center(
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                  elevation: 0,
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: const BorderSide(color: Colors.black12),
+                  ),
                 ),
-              ),
-              child: const Text(
-                'View Resume',
-                style: TextStyle(fontWeight: FontWeight.w600),
+                child: const Text(
+                  'View Resume',
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                ),
               ),
             ),
           ),
-        ),
-        Row(
-          children: [
-            _circleIcon(Icons.share_outlined),
-            const SizedBox(width: 8),
-            _circleIcon(Icons.download_outlined),
-          ],
-        ),
-      ],
+          Row(
+            children: [
+              _circleIcon(Icons.share_outlined),
+              const SizedBox(width: 8),
+              _circleIcon(Icons.download_outlined),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -399,6 +402,7 @@ class _MyWidgetState extends State<HomeScreen> {
   // RESUME CARD SECTION
   Widget _buildResumeCard(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(12.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),

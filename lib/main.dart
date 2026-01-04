@@ -13,8 +13,7 @@ import 'package:weebird_app/presentation/business_logic/blocs/login_bloc/login_b
 import 'package:weebird_app/presentation/business_logic/blocs/user_list_bloc/bloc/user_list_bloc_bloc.dart';
 import 'package:weebird_app/presentation/business_logic/blocs/user_logout/user_logout_bloc.dart';
 import 'package:weebird_app/presentation/business_logic/cubits/internet_cubit.dart';
-import 'package:weebird_app/presentation/views/auth/intro_screen.dart';
-import 'package:weebird_app/presentation/views/auth/login_screen.dart';
+
 import 'package:weebird_app/presentation/views/home/main_screen.dart';
 import 'package:flutter/foundation.dart' show kIsWeb, defaultTargetPlatform, TargetPlatform;
 
@@ -25,6 +24,9 @@ import 'data/repositories/user_list_repository.dart';
 import 'data/repositories/user_logout_repository.dart';
 import 'data/repositories/user_repository.dart';
 import 'data/session_manager/user_prefs_manager.dart';
+import 'features/auth/intro_screen.dart';
+import 'features/auth/login_screen.dart';
+import 'features/auth/onboarding_auth_screen.dart';
 
 
 void main() async {
@@ -185,14 +187,15 @@ class _MyAppStartState extends State<MyAppStart> {
             }
             if (state is AuthUnAuthorized) {
               //return LoginScreen(userPrefsManager: widget.userPrefsManager);
-
-              return MainScreen(
-                  userName: 'state.userName',
-                  email: 'test@gmail.com',
-                  deptName: 'cse',
-                  mobile: '01738039685'
-                // projectCode: state.projectCode,
-              );
+              //return IntroPage(key:UniqueKey() , userPrefsManager: widget.userPrefsManager);
+              return OnboardingAuthScreen();
+              // return MainScreen(
+              //     userName: 'state.userName',
+              //     email: 'test@gmail.com',
+              //     deptName: 'cse',
+              //     mobile: '01738039685'
+              //   // projectCode: state.projectCode,
+              // );
             }
             if (state is AuthLoading) {
               return Scaffold(

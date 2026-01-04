@@ -6,9 +6,9 @@ import 'package:flutter_svg/svg.dart';
 import '../../../config/routes/app_page.dart';
 import '../../../config/theme/app_theme.dart';
 import '../../../data/session_manager/user_prefs_manager.dart';
-import '../../business_logic/blocs/login_bloc/login_bloc.dart';
-import '../../business_logic/cubits/internet_cubit.dart';
-import '../../widgets/weebird_bottomlogo_widget.dart';
+import '../../presentation/business_logic/blocs/login_bloc/login_bloc.dart';
+import '../../presentation/business_logic/cubits/internet_cubit.dart';
+import '../../presentation/widgets/weebird_bottomlogo_widget.dart';
 
 class LoginForm extends StatefulWidget {
   final UserPrefsManager userPrefsManager;

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:ui';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -24,7 +23,6 @@ import 'data/repositories/user_list_repository.dart';
 import 'data/repositories/user_logout_repository.dart';
 import 'data/repositories/user_repository.dart';
 import 'data/session_manager/user_prefs_manager.dart';
-import 'features/auth/intro_screen.dart';
 import 'features/auth/login_screen.dart';
 import 'features/auth/onboarding_auth_screen.dart';
 
@@ -182,9 +180,7 @@ class _MyAppStartState extends State<MyAppStart> {
                 // projectCode: state.projectCode,
               );
             }
-            if(state is FirstIntroView){
-              return IntroPage(key:UniqueKey() , userPrefsManager: widget.userPrefsManager);
-            }
+
             if (state is AuthUnAuthorized) {
               //return LoginScreen(userPrefsManager: widget.userPrefsManager);
               //return IntroPage(key:UniqueKey() , userPrefsManager: widget.userPrefsManager);

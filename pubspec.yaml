@@ -56,6 +56,7 @@ dependencies:
   back_button_interceptor: ^8.0.4
   firebase_crashlytics: ^5.0.3
   google_fonts: ^6.3.2
+  font_awesome_flutter: ^10.7.0
 
 
 dev_dependencies:

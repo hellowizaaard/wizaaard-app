@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class OnboardingAuthScreen extends StatefulWidget {
   const OnboardingAuthScreen({super.key});
@@ -12,6 +13,8 @@ class OnboardingAuthScreen extends StatefulWidget {
 class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
   final PageController _pageController = PageController();
   int currentIndex = 0;
+  bool isLoginSelected = true;
+  bool showSocialLogin = true;   // first screen shows OR + socials
 
   final titles = [
     "Effortless Resume",
@@ -40,10 +43,10 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
       backgroundColor: const Color(0xFFF3F5F9),
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(height: h * 0.01),
-            // Logo
+            // ─────────── TOP CONTENT ───────────
+            SizedBox(height: h * 0.015),
+
             Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Align(
@@ -55,9 +58,10 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
               ),
             ),
 
-            // Slider
+            SizedBox(height: h * 0.05),
+
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.35,
+              height: h * 0.32,
               child: PageView.builder(
                 controller: _pageController,
                 itemCount: images.length,
@@ -66,7 +70,7 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
                 },
                 itemBuilder: (context, index) {
                   return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(
                         height: h * 0.25,
@@ -75,7 +79,7 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
                           fit: BoxFit.fitHeight,
                         ),
                       ),
-                      SizedBox(height: h * 0.015),
+                      SizedBox(height: h * 0.012),
                       Text(
                         titles[index],
                         style: GoogleFonts.poppins(
@@ -90,7 +94,8 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
               ),
             ),
 
-            // Dots Indicator
+            const SizedBox(height: 6),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
@@ -109,11 +114,10 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
               ),
             ),
 
+            // ───── FLEXIBLE WHITE SPACE ─────
+            Expanded(child: Container()),
 
-            // White breathing space
-            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-
-            // Bottom Card
+            // ─────────── BOTTOM CARD ───────────
             Container(
               padding: const EdgeInsets.all(24),
               decoration: const BoxDecoration(
@@ -123,9 +127,25 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
               child: Column(
                 children: [
                   _inputField(),
+                  // SizedBox(height: h * 0.02),
+                  // _startButton(),
+                  // SizedBox(height: h * 0.09),
+                  // _loginRegisterSwitch(),
+
+
+                  //_inputField(),
                   SizedBox(height: h * 0.02),
-                  _startButton(),
-                  SizedBox(height: h * 0.2),
+
+                  // Show only for REGISTRATION
+                  if (!isLoginSelected) ...[
+                    _orSocialLogin(),
+                    SizedBox(height: h * 0.025),
+                    _registerButton(),
+                  ] else ...[
+                    _loginButton(),
+                  ],
+
+                  SizedBox(height: h * 0.06),
                   _loginRegisterSwitch(),
                 ],
               ),
@@ -133,6 +153,7 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
           ],
         ),
       ),
+
     );
   }
 
@@ -141,7 +162,7 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(15),
       ),
       child: const TextField(
         decoration: InputDecoration(
@@ -152,7 +173,7 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
     );
   }
 
-  Widget _startButton() {
+  Widget _loginButton() {
     return SizedBox(
       width: double.infinity,
       height: 50,
@@ -169,34 +190,140 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
     );
   }
 
-  Widget _loginRegisterSwitch() {
+
+  Widget _registerButton() {
+    return SizedBox(
+      width: double.infinity,
+      height: 50,
+      child: ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF2563EB),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
+        child: const Text("Let's Begin", style: TextStyle(color: Colors.white)),
+      ),
+    );
+  }
+
+
+  Widget _orSocialLogin() {
+    return Column(
+      children: [
+        const SizedBox(height: 18),
+
+        Row(
+          children: const [
+            Expanded(child: Divider(color: Colors.white24)),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: Text("or", style: TextStyle(color: Colors.white70)),
+            ),
+            Expanded(child: Divider(color: Colors.white24)),
+          ],
+        ),
+
+        const SizedBox(height: 18),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _socialBtn("G"),
+            const SizedBox(width: 16),
+            _socialBtn("in"),
+            const SizedBox(width: 16),
+            //_socialBtn(""),
+            _socialBtn(FontAwesomeIcons.apple),
+
+          ],
+        ),
+      ],
+    );
+  }
+  Widget _socialBtn(dynamic icon) {
     return Container(
-      height: 45,
+      height: 44,
+      width: 44,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
-        border: Border.all(color: Colors.white24),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      alignment: Alignment.center,
+      child: icon is IconData
+          ? Icon(icon, color: const Color(0xFF2563EB), size: 20)
+          : Text(
+        icon,
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF2563EB),
+        ),
+      ),
+    );
+  }
+
+
+  Widget _loginRegisterSwitch() {
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 32),
+      height: 50,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: Colors.white),
       ),
       child: Row(
         children: [
+          // LOGIN
           Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
-              ),
-              alignment: Alignment.center,
-              child: const Text(
-                "Login",
-                style: TextStyle(
-                  color: Color(0xFF041C3F),
-                  fontWeight: FontWeight.bold,
+            child: GestureDetector(
+              onTap: () {
+                setState(() => isLoginSelected = true);
+              },
+              child: Container(
+                margin: const EdgeInsets.all(3),
+                decoration: BoxDecoration(
+                  color: isLoginSelected ? Colors.white : Colors.transparent,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  "Login",
+                  style: TextStyle(
+                    color: isLoginSelected
+                        ?  Color(0xFF041C3F) : Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
           ),
-          const Expanded(
-            child: Center(
-              child: Text("Registration", style: TextStyle(color: Colors.white)),
+
+          // REGISTER
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                setState(() => isLoginSelected = false);
+              },
+              child: Container(
+                margin:  EdgeInsets.all(3),
+                decoration: BoxDecoration(
+                  color: !isLoginSelected ? Colors.white : Colors.transparent,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  "Registration",
+                  style: TextStyle(
+                    color: !isLoginSelected
+                        ? const Color(0xFF041C3F)
+                        : Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
           ),
         ],

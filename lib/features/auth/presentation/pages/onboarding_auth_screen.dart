@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../core/config/theme/app_theme.dart';
+import '../../../../core/config/theme/app_theme.dart';
 
 class OnboardingAuthScreen extends StatefulWidget {
   const OnboardingAuthScreen({super.key});

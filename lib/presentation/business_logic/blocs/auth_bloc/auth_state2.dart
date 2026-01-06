@@ -1,17 +1,17 @@
 import 'package:equatable/equatable.dart';
 
-abstract class AuthState extends Equatable {
+abstract class AuthState2 extends Equatable {
   @override
   List<Object> get props => [];
 
   get token => null;
 }
 
-class AuthInitialized extends AuthState {}
+class AuthInitialized extends AuthState2 {}
 
-class AuthUnAuthorized extends AuthState {}
+class AuthUnAuthorized extends AuthState2 {}
 
-class AuthAuthorized extends AuthState {
+class AuthAuthorized extends AuthState2 {
   final String token;
   final String userName;
   final bool notificationEnabled;
@@ -39,6 +39,6 @@ class AuthAuthorized extends AuthState {
       'LoggedIn { token: $token, user status:, user name: $userName}';
 }
 
-class FirstIntroView extends AuthState {}
+class FirstIntroView extends AuthState2 {}
 
-class AuthLoading extends AuthState {}
+class AuthLoading2 extends AuthState2 {}

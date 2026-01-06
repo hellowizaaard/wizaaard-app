@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../business_logic/blocs/auth_bloc/auth_bloc.dart';
-import '../../business_logic/blocs/auth_bloc/auth_state.dart';
+import '../../business_logic/blocs/auth_bloc/auth_bloc2.dart';
+import '../../business_logic/blocs/auth_bloc/auth_state2.dart';
 import '../../../core/network/internet_cubit.dart';
 class RoomScreen extends StatefulWidget {
   const RoomScreen({super.key});
@@ -18,7 +18,7 @@ class _MeetingRoomState extends State<RoomScreen> {
   void initState() {
     super.initState();
 
-    final authState = context.read<AuthBloc>().state;
+    final authState = context.read<AuthBloc2>().state;
     if (authState is AuthAuthorized) {
      // context.read<RoomBloc>().add(GetRoomList(apiToken: authState.token));
     }
@@ -34,7 +34,7 @@ class _MeetingRoomState extends State<RoomScreen> {
   Future<void> _refreshData() async {
     await Future.delayed(const Duration(seconds: 2));
 
-    final authState = context.read<AuthBloc>().state;
+    final authState = context.read<AuthBloc2>().state;
     if (authState is AuthAuthorized) {
       //context.read<RoomBloc>().add(GetRoomList(apiToken: authState.token));
     }
@@ -70,7 +70,7 @@ class _MeetingRoomState extends State<RoomScreen> {
                 ),
               );
             } else if (state is InternetConnected) {
-              final authState = context.read<AuthBloc>().state;
+              final authState = context.read<AuthBloc2>().state;
               if (authState is AuthAuthorized) {
                 // context
                 //     .read<RoomBloc>()

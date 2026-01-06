@@ -1,0 +1,35 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../data/models/profession_model.dart';
+import '../../domain/auth_repository.dart';
+
+part 'auth_event.dart';
+part 'auth_state.dart';
+
+class AuthBloc extends Bloc<AuthEvent, AuthState> {
+  final AuthRepository repository;
+
+  AuthBloc(this.repository) : super(AuthInitial()) {
+
+    on<LoadProfessions>((event, emit) async {
+      emit(ProfessionLoading());
+      try {
+        final data = await repository.getProfessions();
+        emit(ProfessionLoaded(data));
+      } catch (e) {
+        emit(ProfessionError("Failed to load professions"));
+      }
+    });
+
+    on<LoginRequested>((event, emit) async {
+      emit(AuthLoading());
+      await Future.delayed(const Duration(seconds: 1));
+      emit(AuthSuccess());
+    });
+
+    on<RegisterRequested>((event, emit) async {
+      emit(AuthLoading());
+      await Future.delayed(const Duration(seconds: 1));
+      emit(AuthSuccess());
+    });
+  }
+}

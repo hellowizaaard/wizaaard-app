@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../core/config/theme/app_theme.dart';
+import '../../../../core/config/theme/app_theme.dart';
+import '../bloc/auth_bloc.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -15,17 +17,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String? profession;
   bool agree = false;
 
-  final professions = [
-    "Games Designer",
-    "Motion Graphic Designer",
-    "UX Designer",
-    "UI Designer",
-    "UI/UX Designer",
-    "2d/3d Designer",
-    "Graphic Designer",
-    "Product Designer",
-    "Social Content Designer",
-  ];
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<AuthBloc>().add(LoadProfessions());
+  }
+
 
   void _openProfessionSheet() {
     showModalBottomSheet(
@@ -35,49 +33,61 @@ class _RegisterScreenState extends State<RegisterScreen> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (_) {
-        return StatefulBuilder(
-          builder: (context, setModal) {
-            return Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(
-                    decoration: const InputDecoration(
-                      hintText: "Search your profession",
-                      prefixIcon: Icon(Icons.search),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  SizedBox(
-                    height: 300,
-                    child: ListView.builder(
-                      itemCount: professions.length,
-                      itemBuilder: (_, i) {
-                        return ListTile(
-                          title: Text(professions[i]),
-                          trailing: profession == professions[i]
-                              ? const Icon(
-                                  Icons.check_circle,
-                                  color: Colors.blue,
-                                )
-                              : null,
-                          onTap: () {
-                            setState(() => profession = professions[i]);
-                            Navigator.pop(context);
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ],
+        return Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const TextField(
+                decoration: InputDecoration(
+                  hintText: "Search your profession",
+                  prefixIcon: Icon(Icons.search),
+                ),
               ),
-            );
-          },
+              const SizedBox(height: 10),
+
+              SizedBox(
+                height: 300,
+                child: BlocBuilder<AuthBloc, AuthState>(
+                  builder: (context, state) {
+                    if (state is ProfessionLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+
+                    if (state is ProfessionLoaded) {
+                      return ListView.builder(
+                        itemCount: state.professions.length,
+                        itemBuilder: (_, i) {
+                          final item = state.professions[i];
+                          return ListTile(
+                            title: Text(item.name),
+                            trailing: profession == item.name
+                                ? const Icon(Icons.check_circle, color: Colors.blue)
+                                : null,
+                            onTap: () {
+                              setState(() => profession = item.name);
+                              Navigator.pop(context);
+                            },
+                          );
+                        },
+                      );
+                    }
+
+                    if (state is ProfessionError) {
+                      return const Center(child: Text("Failed to load professions"));
+                    }
+
+                    return const SizedBox();
+                  },
+                ),
+              ),
+            ],
+          ),
         );
       },
     );
   }
+
 
   @override
   Widget build(BuildContext context) {

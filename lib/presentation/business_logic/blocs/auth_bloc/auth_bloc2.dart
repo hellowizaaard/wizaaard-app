@@ -4,10 +4,10 @@ import 'package:bloc/bloc.dart';
 import '../../../../data/session_manager/user_prefs_manager.dart';
 import 'auth.dart';
 
-class AuthBloc extends Bloc<AuthEvent, AuthState> {
+class AuthBloc2 extends Bloc<AuthEvent2, AuthState2> {
   final UserPrefsManager prefsManager;
 
-  AuthBloc(this.prefsManager) : super(AuthInitialized()) {
+  AuthBloc2(this.prefsManager) : super(AuthInitialized()) {
     on<AppStarted>((event, emit) async {
       try {
         final bool firstIntro = await prefsManager.isFirstIntroPreview();
@@ -20,10 +20,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         // final projectCode = await prefsManager.getProjectCode();
         final bool notificationEnabled = await prefsManager.hasNotification();
 
-        emit(AuthLoading());
+        emit(AuthLoading2());
 
         if (firstIntro) {
-          print('first intro is $firstIntro');
           if (hasToken) {
             emit(AuthAuthorized(
               email: email,

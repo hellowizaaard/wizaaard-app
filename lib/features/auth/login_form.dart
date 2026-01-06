@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../config/routes/app_page.dart';
-import '../../../config/theme/app_theme.dart';
 import '../../../data/session_manager/user_prefs_manager.dart';
+import '../../core/config/routes/app_page.dart';
+import '../../core/config/theme/app_theme.dart';
 import '../../presentation/business_logic/blocs/login_bloc/login_bloc.dart';
-import '../../presentation/business_logic/cubits/internet_cubit.dart';
+import '../../core/network/internet_cubit.dart';
 import '../../presentation/widgets/weebird_bottomlogo_widget.dart';
 
 class LoginForm extends StatefulWidget {

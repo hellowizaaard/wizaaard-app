@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../data/session_manager/user_prefs_manager.dart';
-import '../../features/auth/login_screen.dart';
-import '../../main.dart';
-import '../../presentation/views/settings/change_password_form.dart';
-import '../../presentation/widgets/no_screen_found.dart';
+import '../../../data/session_manager/user_prefs_manager.dart';
+import '../../../features/auth/login_screen.dart';
+import '../../../main.dart';
+import '../../../presentation/views/settings/change_password_form.dart';
+import '../../../presentation/widgets/no_screen_found.dart';
 import 'app_page.dart';
 
 class AppRouter {

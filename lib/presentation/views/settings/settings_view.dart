@@ -2,14 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import '../../../config/routes/app_page.dart';
-import '../../../config/theme/app_theme.dart';
+
+import '../../../core/config/routes/app_page.dart';
+import '../../../core/config/theme/app_theme.dart';
 import '../../../data/session_manager/user_prefs_manager.dart';
 import '../../business_logic/blocs/auth_bloc/auth_bloc.dart';
 import '../../business_logic/blocs/auth_bloc/auth_event.dart';
 import '../../business_logic/blocs/auth_bloc/auth_state.dart';
 import '../../business_logic/blocs/user_logout/user_logout_bloc.dart';
-import '../../business_logic/cubits/internet_cubit.dart';
+import '../../../core/network/internet_cubit.dart';
 import '../../widgets/settings_items.dart';
 
 class SettingsView extends StatefulWidget {

@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../config/theme/app_theme.dart';
+import '../../../core/config/theme/app_theme.dart';
 import '../../business_logic/blocs/auth_bloc/auth_bloc.dart';
 import '../../business_logic/blocs/auth_bloc/auth_event.dart';
 import '../../business_logic/blocs/auth_bloc/auth_state.dart';
 import '../../business_logic/blocs/change_password_bloc/change_password_bloc.dart';
 import '../../business_logic/blocs/change_password_bloc/change_password_state.dart';
-import '../../business_logic/cubits/internet_cubit.dart';
+import '../../../core/network/internet_cubit.dart';
 import '../../widgets/appbar_widget.dart';
 
 class ChangePasswordForm extends StatefulWidget {

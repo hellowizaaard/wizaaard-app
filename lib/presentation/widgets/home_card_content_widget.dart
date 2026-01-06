@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../config/theme/app_theme.dart';
+import '../../core/config/theme/app_theme.dart';
+
 
 class HomeCardContentWidget extends StatelessWidget {
   final String title;

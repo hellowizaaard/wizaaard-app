@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-import '../../../config/theme/app_theme.dart';
+import '../../../core/config/theme/app_theme.dart';
+
 
 class BottomTabbedView extends StatefulWidget {
   final List<Widget> screen;

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:weebird_app/presentation/widgets/user_info.dart';
 
-import '../../config/theme/app_theme.dart';
+import '../../core/config/theme/app_theme.dart';
+
 
 PreferredSize buildAppBarHome(
   BuildContext context, {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weebird_app/presentation/widgets/user_info_details_widget.dart';
 
-import '../../config/theme/app_theme.dart';
+import '../../core/config/theme/app_theme.dart';
 import 'appbar_widget.dart';
 
 class UserInfo extends StatelessWidget {

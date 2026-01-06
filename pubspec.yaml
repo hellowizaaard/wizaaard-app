@@ -35,24 +35,22 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
 
-  flutter_secure_storage: ^9.0.0
+  flutter_secure_storage: ^10.0.0
   dio: ^5.4.0
 
   equatable: ^2.0.5
   bloc: ^9.1.0
   flutter_bloc: ^9.1.1
   introduction_screen: ^4.0.0
-  connectivity_plus: 5.0.2
+  connectivity_plus: ^7.0.0
 
-  flutter_svg: 2.2.1
+  flutter_svg: ^2.2.3
   intl: ^0.20.2
   badges: ^3.1.2
   google_nav_bar: ^5.0.7
   upgrader: ^12.1.0
   package_info_plus: ^9.0.0
-  firebase_core: ^4.2.0
-  firebase_analytics: ^12.0.3
-  firebase_messaging: ^16.0.3
+
   back_button_interceptor: ^8.0.4
   firebase_crashlytics: ^5.0.3
   google_fonts: ^6.3.2
@@ -71,7 +69,7 @@ dev_dependencies:
   flutter_lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+# following pages: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:

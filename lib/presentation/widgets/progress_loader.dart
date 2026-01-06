@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../config/theme/app_theme.dart';
+import '../../core/config/theme/app_theme.dart';
+
 
 class ProgressLoader extends StatelessWidget {
   const ProgressLoader({super.key});

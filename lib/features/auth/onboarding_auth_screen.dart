@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../core/config/theme/app_theme.dart';
+
 class OnboardingAuthScreen extends StatefulWidget {
   const OnboardingAuthScreen({super.key});
 
@@ -14,7 +16,7 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
   final PageController _pageController = PageController();
   int currentIndex = 0;
   bool isLoginSelected = true;
-  bool showSocialLogin = true;   // first screen shows OR + socials
+  bool showSocialLogin = true; // first screen shows OR + socials
 
   final titles = [
     "Effortless Resume",
@@ -23,7 +25,7 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
     "Flexible Templates",
     "Flexible Templates",
     "Connect Right Jobs",
-    "Mentor Guidance"
+    "Mentor Guidance",
   ];
 
   final images = [
@@ -32,7 +34,7 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
     "assets/onboard/onboard_3.svg",
     "assets/onboard/onboard_4.svg",
     "assets/onboard/onboard_5.svg",
-    "assets/onboard/onboard_6.svg"
+    "assets/onboard/onboard_6.svg",
   ];
 
   @override
@@ -51,10 +53,7 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
               padding: const EdgeInsets.only(left: 20),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Image.asset(
-                  'assets/logo/logo.png',
-                  height: 28,
-                ),
+                child: Image.asset('assets/logo/logo.png', height: 28),
               ),
             ),
 
@@ -100,7 +99,7 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
                 images.length,
-                    (index) => Container(
+                (index) => Container(
                   margin: const EdgeInsets.symmetric(horizontal: 4),
                   width: currentIndex == index ? 10 : 6,
                   height: 6,
@@ -119,21 +118,18 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
 
             // ─────────── BOTTOM CARD ───────────
             Container(
-              padding: const EdgeInsets.all(24),
-              decoration: const BoxDecoration(
-                color: Color(0xFF041C3F),
-                borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+              padding: const EdgeInsets.all(22),
+              margin: EdgeInsets.only(left: 2.0, right: 2.0),
+              decoration: BoxDecoration(
+                color: AppColorTheme.primaryDark,
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
               ),
               child: Column(
                 children: [
                   _inputField(),
-                  // SizedBox(height: h * 0.02),
-                  // _startButton(),
-                  // SizedBox(height: h * 0.09),
-                  // _loginRegisterSwitch(),
 
-
-                  //_inputField(),
                   SizedBox(height: h * 0.02),
 
                   // Show only for REGISTRATION
@@ -153,7 +149,6 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
           ],
         ),
       ),
-
     );
   }
 
@@ -180,16 +175,18 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
       child: ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF2563EB),
+          backgroundColor: AppColorTheme.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
         ),
-        child: const Text("Start With Login", style: TextStyle(color: Colors.white),),
+        child: const Text(
+          "Start With Login",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }
-
 
   Widget _registerButton() {
     return SizedBox(
@@ -198,7 +195,7 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
       child: ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF2563EB),
+          backgroundColor: AppColorTheme.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
@@ -207,7 +204,6 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
       ),
     );
   }
-
 
   Widget _orSocialLogin() {
     return Column(
@@ -236,12 +232,12 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
             const SizedBox(width: 16),
             //_socialBtn(""),
             _socialBtn(FontAwesomeIcons.apple),
-
           ],
         ),
       ],
     );
   }
+
   Widget _socialBtn(dynamic icon) {
     return Container(
       height: 44,
@@ -254,19 +250,17 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
       child: icon is IconData
           ? Icon(icon, color: const Color(0xFF2563EB), size: 20)
           : Text(
-        icon,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          color: Color(0xFF2563EB),
-        ),
-      ),
+              icon,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF2563EB),
+              ),
+            ),
     );
   }
 
-
   Widget _loginRegisterSwitch() {
-
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 32),
       height: 50,
@@ -292,8 +286,7 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
                 child: Text(
                   "Login",
                   style: TextStyle(
-                    color: isLoginSelected
-                        ?  Color(0xFF041C3F) : Colors.white,
+                    color: isLoginSelected ? Color(0xFF041C3F) : Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -308,7 +301,7 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
                 setState(() => isLoginSelected = false);
               },
               child: Container(
-                margin:  EdgeInsets.all(3),
+                margin: EdgeInsets.all(3),
                 decoration: BoxDecoration(
                   color: !isLoginSelected ? Colors.white : Colors.transparent,
                   borderRadius: BorderRadius.circular(15),

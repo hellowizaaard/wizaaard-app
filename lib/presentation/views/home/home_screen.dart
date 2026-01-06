@@ -2,11 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 
-import '../../../config/theme/app_theme.dart';
-import '../../business_logic/cubits/internet_cubit.dart';
-import '../../widgets/home_card_content_widget.dart';
+import '../../../core/config/theme/app_theme.dart';
+import '../../../core/network/internet_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key});

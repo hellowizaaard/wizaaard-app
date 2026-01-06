@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../business_logic/blocs/auth_bloc/auth_bloc.dart';
 import '../../business_logic/blocs/auth_bloc/auth_state.dart';
-import '../../business_logic/cubits/internet_cubit.dart';
+import '../../../core/network/internet_cubit.dart';
 class RoomScreen extends StatefulWidget {
   const RoomScreen({super.key});
 

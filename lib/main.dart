@@ -5,19 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:upgrader/upgrader.dart';
+import 'package:weebird_app/features/auth/register_screen.dart';
 import 'package:weebird_app/presentation/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:weebird_app/presentation/business_logic/blocs/auth_bloc/auth_event.dart';
 import 'package:weebird_app/presentation/business_logic/blocs/auth_bloc/auth_state.dart';
 import 'package:weebird_app/presentation/business_logic/blocs/login_bloc/login_bloc.dart';
 import 'package:weebird_app/presentation/business_logic/blocs/user_list_bloc/bloc/user_list_bloc_bloc.dart';
 import 'package:weebird_app/presentation/business_logic/blocs/user_logout/user_logout_bloc.dart';
-import 'package:weebird_app/presentation/business_logic/cubits/internet_cubit.dart';
+import 'package:weebird_app/core/network/internet_cubit.dart';
 
 import 'package:weebird_app/presentation/views/home/main_screen.dart';
 import 'package:flutter/foundation.dart' show kIsWeb, defaultTargetPlatform, TargetPlatform;
 
-import 'config/routes/app_router.dart';
-import 'config/theme/app_theme.dart';
+import 'core/config/routes/app_router.dart';
+import 'core/config/theme/app_theme.dart';
 import 'data/api/api_client.dart';
 import 'data/repositories/user_list_repository.dart';
 import 'data/repositories/user_logout_repository.dart';
@@ -184,7 +185,7 @@ class _MyAppStartState extends State<MyAppStart> {
             if (state is AuthUnAuthorized) {
               //return LoginScreen(userPrefsManager: widget.userPrefsManager);
               //return IntroPage(key:UniqueKey() , userPrefsManager: widget.userPrefsManager);
-              return OnboardingAuthScreen();
+              return RegisterScreen();
               // return MainScreen(
               //     userName: 'state.userName',
               //     email: 'test@gmail.com',

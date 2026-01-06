@@ -1,10 +1,8 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../config/theme/app_theme.dart';
-import '../../business_logic/cubits/internet_cubit.dart';
+import '../../../core/network/internet_cubit.dart';
 
 class VerifyOtpScreen extends StatefulWidget {
   final String email;

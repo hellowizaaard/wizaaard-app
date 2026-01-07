@@ -1,26 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:weebird_app/core/config/theme/app_theme.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginScreen extends StatefulWidget {
-  final String email;
-  const LoginScreen({super.key, required this.email});
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  bool hide = true;
-  late TextEditingController emailCtrl;
-
-  @override
-  void initState() {
-    super.initState();
-    emailCtrl = TextEditingController(text: widget.email);
-  }
-
+class ForgotPasswordOtpScreen extends StatelessWidget {
+  const ForgotPasswordOtpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,41 +10,30 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "You've a password to\nget in!",
+                "You've got the\nsecret code!",
                 style: GoogleFonts.poppins(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: AppColorTheme.primary,
+                  color: Colors.blue,
                 ),
               ),
 
               const SizedBox(height: 10),
 
-              Row(
-                children: [
-                  const Text("Don't have an account? "),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text("Register now"),
-                  ),
-                ],
+              const Text(
+                "Enter the confirmation code we just send you in your email.",
               ),
 
               const SizedBox(height: 30),
 
               TextField(
-                obscureText: hide,
                 decoration: InputDecoration(
-                  hintText: "**********",
-                  suffixIcon: IconButton(
-                    icon: Icon(hide ? Icons.visibility_off : Icons.visibility),
-                    onPressed: () => setState(() => hide = !hide),
-                  ),
+                  hintText: "Enter OTP here",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -73,8 +44,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
               Row(
                 children: [
-                  Checkbox(value: false, onChanged: (_) {}),
-                  const Text("Forget Password? Then login with OTP"),
+                  const Text("Don't receive a code? "),
+                  TextButton(onPressed: () {}, child: const Text("resend")),
                 ],
               ),
 
@@ -92,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   child: const Text(
-                    "Log in",
+                    "Confirm OTP",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

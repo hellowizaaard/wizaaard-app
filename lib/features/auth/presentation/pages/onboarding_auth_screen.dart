@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:weebird_app/core/utils/validators.dart';
 
+import '../../../../core/config/routes/app_router.dart';
 import '../../../../core/config/theme/app_theme.dart';
 
 class OnboardingAuthScreen extends StatefulWidget {
@@ -36,6 +38,9 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
     "assets/onboard/onboard_5.svg",
     "assets/onboard/onboard_6.svg",
   ];
+
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController emailCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +133,11 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
               ),
               child: Column(
                 children: [
-                  _inputField(),
+                  Form(
+                    key: _formKey,
+                    child: _inputField(),
+                  ),
+
 
                   SizedBox(height: h * 0.02),
 
@@ -159,12 +168,15 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
       ),
-      child: const TextField(
-        decoration: InputDecoration(
+      child: TextFormField(
+        controller: emailCtrl,
+        keyboardType: TextInputType.emailAddress,
+        decoration: const InputDecoration(
           hintText: "Enter Email Address",
           border: InputBorder.none,
         ),
-      ),
+        validator: Validators.email,
+      )
     );
   }
 
@@ -173,7 +185,15 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
       width: double.infinity,
       height: 50,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          if (_formKey.currentState!.validate()) {
+            Navigator.pushNamed(
+              context,
+              AppRouter.login,
+              arguments: emailCtrl.text,
+            );
+          }
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColorTheme.primary,
           shape: RoundedRectangleBorder(

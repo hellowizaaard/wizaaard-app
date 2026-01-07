@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import '../../../core/config/routes/app_page.dart';
+import '../../../core/config/routes/app_router.dart';
 import '../../../core/config/theme/app_theme.dart';
 import '../../../data/session_manager/user_prefs_manager.dart';
 import '../../../features/auth/presentation/bloc/auth_bloc.dart';
@@ -76,26 +76,28 @@ class _SettingsViewState extends State<SettingsView> {
       final authBloc = context.read<AuthBloc>().state;
 
       if (authBloc is Authorized) {
-        BlocProvider.of<UserLogoutBloc>(context).add(UserLogoutButtonPressed(
-          token: 'authBloc.token',
-        ));
+        BlocProvider.of<UserLogoutBloc>(
+          context,
+        ).add(UserLogoutButtonPressed(token: 'authBloc.token'));
       }
     }
 
     return MultiBlocListener(
       listeners: [
-        BlocListener<InternetCubit, InternetState>(listener: (context, state) {
-          if (state is InternetDisconnected) {
-            String errorMessage = "No Internet Connection!";
+        BlocListener<InternetCubit, InternetState>(
+          listener: (context, state) {
+            if (state is InternetDisconnected) {
+              String errorMessage = "No Internet Connection!";
 
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(errorMessage),
-                backgroundColor: Colors.green,
-              ),
-            );
-          }
-        }),
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(errorMessage),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            }
+          },
+        ),
         BlocListener<UserLogoutBloc, UserLogoutState>(
           listener: (context, state) {
             if (state is UserLogoutFailure) {
@@ -127,11 +129,7 @@ class _SettingsViewState extends State<SettingsView> {
               //MessagingService().unsubscribeFromNotifications();
 
               // Dispatch the LoggedOut event to AuthBloc
-             // BlocProvider.of<AuthBloc>(context).add(LoggedOut());
-
-
-
-
+              // BlocProvider.of<AuthBloc>(context).add(LoggedOut());
             }
           },
         ),
@@ -150,8 +148,11 @@ class _SettingsViewState extends State<SettingsView> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(Icons.notifications_none_rounded,
-                            size: 24, color: AppColorTheme.secondary),
+                        Icon(
+                          Icons.notifications_none_rounded,
+                          size: 24,
+                          color: AppColorTheme.secondary,
+                        ),
                         const SizedBox(width: 12.0), // Add SizedBox for spacing
                         Expanded(
                           // Wrap Row with Expanded
@@ -193,10 +194,12 @@ class _SettingsViewState extends State<SettingsView> {
                                       String message = value
                                           ? 'Notification On'
                                           : 'Notification Off';
-                                      Color snackBarColor =
-                                          value ? Colors.green : Colors.red;
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
+                                      Color snackBarColor = value
+                                          ? Colors.green
+                                          : Colors.red;
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
                                         SnackBar(
                                           content: Text(message),
                                           backgroundColor: snackBarColor,
@@ -213,35 +216,34 @@ class _SettingsViewState extends State<SettingsView> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
-
-                    },
+                    onTap: () {},
                     child: const SettingsItems(
-                        icons: Icons.lock_outline,
-                        title: 'Privacy and Security'),
+                      icons: Icons.lock_outline,
+                      title: 'Privacy and Security',
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: const SettingsItems(
+                      icons: Icons.support_agent,
+                      title: 'Help and support',
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: const SettingsItems(
+                      icons: Icons.question_mark_rounded,
+                      title: 'About Us',
+                    ),
                   ),
                   GestureDetector(
                     onTap: () {
-
-                    },
-                    child: const SettingsItems(
-                        icons: Icons.support_agent, title: 'Help and support'),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-
-                    },
-                    child: const SettingsItems(
-                        icons: Icons.question_mark_rounded, title: 'About Us'),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushNamed(
-                        Pages.change_pass,
-                      );
+                      Navigator.of(context).pushNamed(AppRouter.home);
                     },
                     child: SettingsItems(
-                        icons: Icons.key_rounded, title: 'Change Password'),
+                      icons: Icons.key_rounded,
+                      title: 'Change Password',
+                    ),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -249,22 +251,25 @@ class _SettingsViewState extends State<SettingsView> {
                         context: context,
                         builder: (ctx) => AlertDialog(
                           title: const Text("Logout"),
-                          content:
-                              const Text("Are you sure you want to logout"),
+                          content: const Text(
+                            "Are you sure you want to logout",
+                          ),
                           actions: <Widget>[
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 TextButton(
-                                    onPressed: () {
-                                      Navigator.of(ctx).pop();
-                                    },
-                                    child: Text(
-                                      'Cancel',
-                                      style: TextStyle(
-                                          color: AppColorTheme.primary),
-                                    )),
+                                  onPressed: () {
+                                    Navigator.of(ctx).pop();
+                                  },
+                                  child: Text(
+                                    'Cancel',
+                                    style: TextStyle(
+                                      color: AppColorTheme.primary,
+                                    ),
+                                  ),
+                                ),
                                 TextButton(
                                   style: TextButton.styleFrom(
                                     foregroundColor: AppColorTheme.primary,
@@ -278,8 +283,9 @@ class _SettingsViewState extends State<SettingsView> {
                                     child: const Text(
                                       "Ok",
                                       style: TextStyle(
-                                          color: AppColorTheme.white,
-                                          fontWeight: FontWeight.bold),
+                                        color: AppColorTheme.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),

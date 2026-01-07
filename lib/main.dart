@@ -16,12 +16,14 @@ import 'package:weebird_app/presentation/views/home/main_screen.dart';
 import 'package:flutter/foundation.dart' show kIsWeb, defaultTargetPlatform, TargetPlatform;
 
 import 'core/config/routes/app_router.dart';
+import 'core/config/routes/route_generator.dart';
 import 'core/config/theme/app_theme.dart';
 import 'data/api/api_client.dart';
 import 'data/repositories/user_list_repository.dart';
 import 'data/repositories/user_logout_repository.dart';
 import 'data/repositories/user_repository.dart';
 import 'data/session_manager/user_prefs_manager.dart';
+import 'features/auth/presentation/pages/login_screen.dart';
 import 'injection_container.dart' as di;
 
 
@@ -128,7 +130,6 @@ class _MyAppStartState extends State<MyAppStart> {
 
   @override
   Widget build(BuildContext context) {
-    final AppRouter _appRouter = AppRouter();
 
     const appcastURL =
         'https://raw.githubusercontent.com/larryaasen/upgrader/master/test/testappcast.xml';
@@ -136,7 +137,7 @@ class _MyAppStartState extends State<MyAppStart> {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: _appRouter.generateRoute,
+      onGenerateRoute: RouteGenerator.generate,
       home: UpgradeAlert(
         showLater: true,
         showIgnore: true,

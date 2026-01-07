@@ -48,7 +48,7 @@ class AuthRemoteDatasource {
 
   Future<bool> isLoggedIn() async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return true; // later check token or local storage
+    return false; // later check token or local storage
   }
 
 }

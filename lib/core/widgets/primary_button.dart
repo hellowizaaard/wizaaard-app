@@ -4,17 +4,16 @@ import '../config/theme/app_theme.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String title;
-  final String? route;
-  final bool replace;
   final VoidCallback? onPressed;
+  final bool isLoading;
   final bool colorPrimary;
+
 
   const PrimaryButton({
     super.key,
     required this.title,
-    this.route,
-    this.replace = false,
     this.onPressed,
+    this.isLoading = false,
     this.colorPrimary = true,
   });
 
@@ -24,25 +23,21 @@ class PrimaryButton extends StatelessWidget {
       width: double.infinity,
       height: 50,
       child: ElevatedButton(
-        onPressed:
-            onPressed ??
-            () {
-              if (route == null) return;
-              if (replace) {
-                Navigator.pushReplacementNamed(context, route!);
-              } else {
-                Navigator.pushNamed(context, route!);
-              }
-            },
+        onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: colorPrimary
-              ? AppColorTheme.primary
-              : AppColorTheme.primaryDark,
+          backgroundColor:
+          colorPrimary ? AppColorTheme.primary : AppColorTheme.primaryDark,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
         ),
-        child: Text(title, style: const TextStyle(color: Colors.white)),
+        child: isLoading
+            ? const SizedBox(
+          height: 22,
+          width: 22,
+          child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+        )
+            : Text(title, style: const TextStyle(color: Colors.white)),
       ),
     );
   }

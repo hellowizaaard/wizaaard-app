@@ -197,7 +197,6 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
             arguments: emailCtrl.text,
           );
         },
-        route: AppRouter.login,
       ),
     );
   }
@@ -207,22 +206,23 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
       width: double.infinity,
       height: 50,
 
-      child: PrimaryButton(title: "Let's Begin",
-          onPressed: () {
-            final error = Validators.email(emailCtrl.text);
-            if (error != null) {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text(error)));
-              return;
-            }
-            Navigator.pushNamed(
+      child: PrimaryButton(
+        title: "Let's Begin",
+        onPressed: () {
+          final error = Validators.email(emailCtrl.text);
+          if (error != null) {
+            ScaffoldMessenger.of(
               context,
-              AppRouter.register,
-              arguments: emailCtrl.text,
-            );
-          },
-          route: AppRouter.register),
+            ).showSnackBar(SnackBar(content: Text(error)));
+            return;
+          }
+          Navigator.pushNamed(
+            context,
+            AppRouter.register,
+            arguments: emailCtrl.text,
+          );
+        },
+      ),
     );
   }
 

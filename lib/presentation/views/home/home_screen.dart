@@ -45,38 +45,37 @@ class _MyWidgetState extends State<HomeScreen> {
           listener: (context, state) {
             if (state is InternetDisconnected) {
               String errorMessage = "No Internet Connection!";
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(errorMessage),
-                backgroundColor: Colors.red,
-              ));
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(errorMessage),
+                  backgroundColor: Colors.red,
+                ),
+              );
             } else if (state is InternetConnected) {
               loadDashboardAPIs();
             }
           },
         ),
-        
       ],
       child: SingleChildScrollView(
         child: Column(
           children: [
             _buildTopView(),
-        
+
             _buildMiddleView(),
             _buildCompleteButtonView(),
             // 🔹 Header Section
             _buildHeader(),
-        
+
             const SizedBox(height: 16),
-        
+
             // 🔹 Resume Card Section
             _buildResumeCard(context),
           ],
         ),
-      )
-      
+      ),
     );
   }
-
 
   Widget _buildTopView() {
     return Container(
@@ -100,10 +99,7 @@ class _MyWidgetState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // 🔹 Top Logo
-          Image.asset(
-              'assets/icons/app_logo.png',
-              height: 28,
-            ),
+          Image.asset('assets/icons/app_logo.png', height: 28),
 
           const SizedBox(height: 24),
           buildWelcomeText("Mohammad Asadul"),
@@ -111,18 +107,12 @@ class _MyWidgetState extends State<HomeScreen> {
           // 🔹 Subtitle Text
           const Text(
             "Let's complete your digital profile fully and express your professional life to the world...",
-            style: TextStyle(
-              color: Colors.white70,
-              fontSize: 16,
-              height: 1.5,
-            ),
+            style: TextStyle(color: Colors.white70, fontSize: 16, height: 1.5),
           ),
         ],
       ),
     );
   }
-
-
 
   Widget _buildMiddleView() {
     return Container(
@@ -156,8 +146,11 @@ class _MyWidgetState extends State<HomeScreen> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.check_circle,
-                          color: AppColorTheme.primaryDark, size: 20),
+                      Icon(
+                        Icons.check_circle,
+                        color: AppColorTheme.primaryDark,
+                        size: 20,
+                      ),
                       const SizedBox(width: 6),
                       const Text(
                         'Profile Completion',
@@ -171,10 +164,7 @@ class _MyWidgetState extends State<HomeScreen> {
                   const SizedBox(height: 6),
                   const Text(
                     '12% increase than last 7 days',
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: 12,
-                    ),
+                    style: TextStyle(color: Colors.black54, fontSize: 12),
                   ),
                   const SizedBox(height: 8),
                   // Progress indicator for profile completion
@@ -190,10 +180,7 @@ class _MyWidgetState extends State<HomeScreen> {
                   const SizedBox(height: 6),
                   const Text(
                     '70%',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                   ),
                 ],
               ),
@@ -214,8 +201,11 @@ class _MyWidgetState extends State<HomeScreen> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.visibility,
-                          color: AppColorTheme.primaryDark, size: 20),
+                      Icon(
+                        Icons.visibility,
+                        color: AppColorTheme.primaryDark,
+                        size: 20,
+                      ),
                       const SizedBox(width: 6),
                       const Text(
                         'Profile Viewed',
@@ -229,18 +219,12 @@ class _MyWidgetState extends State<HomeScreen> {
                   const SizedBox(height: 6),
                   const Text(
                     '22% increase than last 7 days',
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: 12,
-                    ),
+                    style: TextStyle(color: Colors.black54, fontSize: 12),
                   ),
                   const SizedBox(height: 8),
                   const Text(
                     '230',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ],
               ),
@@ -251,7 +235,6 @@ class _MyWidgetState extends State<HomeScreen> {
     );
   }
 
-
   Widget _buildCompleteButtonView() {
     return Container(
       width: double.infinity,
@@ -260,10 +243,7 @@ class _MyWidgetState extends State<HomeScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppColorTheme.light_gray,
-          width: 1.5,
-        ),
+        border: Border.all(color: AppColorTheme.light_gray, width: 1.5),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -308,22 +288,17 @@ class _MyWidgetState extends State<HomeScreen> {
     );
   }
 
-
-
   Widget buildWelcomeText(String name) {
     return RichText(
       text: TextSpan(
         children: [
           const TextSpan(
             text: 'Welcome back, ',
-            style: TextStyle(
-              color: Colors.white70,
-              fontSize: 20,
-            ),
+            style: TextStyle(color: Colors.white70, fontSize: 20),
           ),
           TextSpan(
             text: name,
-            style:  TextStyle(
+            style: TextStyle(
               color: AppColorTheme.primary,
               fontSize: 20,
               fontWeight: FontWeight.w600,
@@ -334,8 +309,6 @@ class _MyWidgetState extends State<HomeScreen> {
     );
   }
 
-
-
   Widget _buildHeader() {
     return Container(
       margin: EdgeInsets.only(left: 12.0, right: 12.0),
@@ -344,10 +317,7 @@ class _MyWidgetState extends State<HomeScreen> {
         children: [
           const Text(
             'My Resume',
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
           Expanded(
             child: Center(
@@ -357,8 +327,10 @@ class _MyWidgetState extends State<HomeScreen> {
                   backgroundColor: Colors.white,
                   foregroundColor: Colors.black,
                   elevation: 0,
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                     side: const BorderSide(color: Colors.black12),
@@ -435,8 +407,10 @@ class _MyWidgetState extends State<HomeScreen> {
                   children: const [
                     Text(
                       'Mohammad Asadul Islam',
-                      style:
-                      TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Text(
                       'I\'m a “Product Designer”',
@@ -523,12 +497,11 @@ class _MyWidgetState extends State<HomeScreen> {
     // You can keep your existing GNav bottom navigation here
     return SizedBox(height: 80); // placeholder for now
   }
-
-
 }
 
 class _SkillChip extends StatelessWidget {
   final String label;
+
   const _SkillChip(this.label);
 
   @override
@@ -545,6 +518,7 @@ class _SkillChip extends StatelessWidget {
 class _LinkText extends StatelessWidget {
   final String title;
   final String link;
+
   const _LinkText(this.title, this.link);
 
   @override

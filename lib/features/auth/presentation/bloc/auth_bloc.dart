@@ -35,16 +35,34 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
+
+
+
     on<LoginRequested>((event, emit) async {
       emit(AuthLoading());
+
       final ok = await repository.login(event.email, event.password);
 
       if (ok) {
+        await repository.saveToken("xosId89skdjhshhs89KK");
         emit(Authorized());
       } else {
         emit(AuthFailure("Invalid email or password"));
       }
     });
+
+    on<LogoutRequested>((event, emit) async {
+      await repository.logout();
+      emit(Unauthorized());
+    });
+
+    // PrimaryButton(
+    //   title: "Logout",
+    //   onPressed: () {
+    //     context.read<AuthBloc>().add(LogoutRequested());
+    //   },
+    // ),
+
 
   }
 }

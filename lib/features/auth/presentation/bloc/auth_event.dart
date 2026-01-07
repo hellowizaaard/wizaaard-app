@@ -18,3 +18,5 @@ class RegisterRequested extends AuthEvent {
 class AppStarted extends AuthEvent {}
 
 class LoadProfessions extends AuthEvent {}
+
+class LogoutRequested extends AuthEvent {}

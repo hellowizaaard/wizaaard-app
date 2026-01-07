@@ -26,6 +26,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
 
   void _openProfessionSheet() {
+    final searchCtrl = TextEditingController();
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -34,54 +36,67 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
       builder: (_) {
         return Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const TextField(
-                decoration: InputDecoration(
-                  hintText: "Search your profession",
-                  prefixIcon: Icon(Icons.search),
-                ),
-              ),
-              const SizedBox(height: 10),
+          padding: EdgeInsets.only(
+            left: 16,
+            right: 16,
+            top: 16,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 16,
+          ),
+          child: BlocBuilder<AuthBloc, AuthState>(
+            builder: (context, state) {
+              if (state is ProfessionLoaded) {
+                List filtered = state.professions;
 
-              SizedBox(
-                height: 300,
-                child: BlocBuilder<AuthBloc, AuthState>(
-                  builder: (context, state) {
-                    if (state is ProfessionLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
+                return StatefulBuilder(
+                  builder: (context, setModal) {
+                    final q = searchCtrl.text.toLowerCase();
+                    filtered = state.professions
+                        .where((e) => e.name.toLowerCase().contains(q))
+                        .toList();
 
-                    if (state is ProfessionLoaded) {
-                      return ListView.builder(
-                        itemCount: state.professions.length,
-                        itemBuilder: (_, i) {
-                          final item = state.professions[i];
-                          return ListTile(
-                            title: Text(item.name),
-                            trailing: profession == item.name
-                                ? const Icon(Icons.check_circle, color: Colors.blue)
-                                : null,
-                            onTap: () {
-                              setState(() => profession = item.name);
-                              Navigator.pop(context);
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextField(
+                          controller: searchCtrl,
+                          onChanged: (_) => setModal(() {}),
+                          decoration: const InputDecoration(
+                            hintText: "Search your profession",
+                            prefixIcon: Icon(Icons.search),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        SizedBox(
+                          height: 300,
+                          child: ListView.builder(
+                            itemCount: filtered.length,
+                            itemBuilder: (_, i) {
+                              final item = filtered[i];
+                              return ListTile(
+                                title: Text(item.name),
+                                trailing: profession == item.name
+                                    ? const Icon(Icons.check_circle, color: Colors.blue)
+                                    : null,
+                                onTap: () {
+                                  setState(() => profession = item.name);
+                                  Navigator.pop(context);
+                                },
+                              );
                             },
-                          );
-                        },
-                      );
-                    }
-
-                    if (state is ProfessionError) {
-                      return const Center(child: Text("Failed to load professions"));
-                    }
-
-                    return const SizedBox();
+                          ),
+                        ),
+                      ],
+                    );
                   },
-                ),
-              ),
-            ],
+                );
+              }
+
+              if (state is ProfessionLoading) {
+                return const SizedBox(height: 200, child: Center(child: CircularProgressIndicator()));
+              }
+
+              return const SizedBox(height: 200, child: Center(child: Text("No data")));
+            },
           ),
         );
       },

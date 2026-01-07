@@ -6,10 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:weebird_app/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:weebird_app/features/auth/presentation/pages/register_screen.dart';
-import 'package:weebird_app/presentation/business_logic/blocs/auth_bloc/auth_bloc2.dart';
-import 'package:weebird_app/presentation/business_logic/blocs/auth_bloc/auth_event2.dart';
-import 'package:weebird_app/presentation/business_logic/blocs/auth_bloc/auth_state2.dart';
+import 'package:weebird_app/features/auth/presentation/pages/onboarding_auth_screen.dart';
 import 'package:weebird_app/presentation/business_logic/blocs/login_bloc/login_bloc.dart';
 import 'package:weebird_app/presentation/business_logic/blocs/user_list_bloc/bloc/user_list_bloc_bloc.dart';
 import 'package:weebird_app/presentation/business_logic/blocs/user_logout/user_logout_bloc.dart';
@@ -25,7 +22,6 @@ import 'data/repositories/user_list_repository.dart';
 import 'data/repositories/user_logout_repository.dart';
 import 'data/repositories/user_repository.dart';
 import 'data/session_manager/user_prefs_manager.dart';
-import 'features/auth/domain/auth_repository.dart';
 import 'injection_container.dart' as di;
 
 
@@ -60,9 +56,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthBloc2>(
-          create: (_) => AuthBloc2(userPrefs),
-        ),
 
         BlocProvider<AuthBloc>(
           create: (_) => di.sl<AuthBloc>(),
@@ -123,8 +116,7 @@ class _MyAppStartState extends State<MyAppStart> {
   void initState() {
     super.initState();
     _initializeVersion();
-   // _messagingService.init(context);
-    context.read<AuthBloc2>().add(AppStarted());
+    context.read<AuthBloc>().add(AppStarted());
   }
 
   Future<void> _initializeVersion() async {
@@ -175,9 +167,9 @@ class _MyAppStartState extends State<MyAppStart> {
           debugDisplayOnce: true,
           durationUntilAlertAgain: const Duration(hours: 2),
         ),
-        child: BlocBuilder<AuthBloc2, AuthState2>(
+        child: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
-            if (state is AuthAuthorized) {
+            if (state is Authorized) {
               return MainScreen(
                 userName: 'state.userName',
                 email: 'test@gmail.com',
@@ -187,17 +179,9 @@ class _MyAppStartState extends State<MyAppStart> {
               );
             }
 
-            if (state is AuthUnAuthorized) {
-              //return LoginScreen(userPrefsManager: widget.userPrefsManager);
-              //return IntroPage(key:UniqueKey() , userPrefsManager: widget.userPrefsManager);
-              return RegisterScreen();
-              // return MainScreen(
-              //     userName: 'state.userName',
-              //     email: 'test@gmail.com',
-              //     deptName: 'cse',
-              //     mobile: '01738039685'
-              //   // projectCode: state.projectCode,
-              // );
+            if (state is Unauthorized) {
+              return OnboardingAuthScreen();
+
             }
             if (state is AuthLoading) {
               return Scaffold(

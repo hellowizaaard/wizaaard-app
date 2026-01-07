@@ -20,16 +20,31 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
-    on<LoginRequested>((event, emit) async {
-      emit(AuthLoading());
-      await Future.delayed(const Duration(seconds: 1));
-      emit(AuthSuccess());
-    });
-
     on<RegisterRequested>((event, emit) async {
       emit(AuthLoading());
       await Future.delayed(const Duration(seconds: 1));
       emit(AuthSuccess());
     });
+
+    on<AppStarted>((event, emit) async {
+      final isLoggedIn = await repository.isLoggedIn();
+      if (isLoggedIn) {
+        emit(Authorized());
+      } else {
+        emit(Unauthorized());
+      }
+    });
+
+    on<LoginRequested>((event, emit) async {
+      emit(AuthLoading());
+      final ok = await repository.login(event.email, event.password);
+
+      if (ok) {
+        emit(Authorized());
+      } else {
+        emit(AuthFailure("Invalid email or password"));
+      }
+    });
+
   }
 }

@@ -6,9 +6,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import '../../../core/config/routes/app_page.dart';
 import '../../../core/config/theme/app_theme.dart';
 import '../../../data/session_manager/user_prefs_manager.dart';
-import '../../business_logic/blocs/auth_bloc/auth_bloc2.dart';
-import '../../business_logic/blocs/auth_bloc/auth_event2.dart';
-import '../../business_logic/blocs/auth_bloc/auth_state2.dart';
+import '../../../features/auth/presentation/bloc/auth_bloc.dart';
 import '../../business_logic/blocs/user_logout/user_logout_bloc.dart';
 import '../../../core/network/internet_cubit.dart';
 import '../../widgets/settings_items.dart';
@@ -75,11 +73,11 @@ class _SettingsViewState extends State<SettingsView> {
   @override
   Widget build(BuildContext context) {
     void onLogoutButtonPressed() {
-      final authBloc = context.read<AuthBloc2>().state;
+      final authBloc = context.read<AuthBloc>().state;
 
-      if (authBloc is AuthAuthorized) {
+      if (authBloc is Authorized) {
         BlocProvider.of<UserLogoutBloc>(context).add(UserLogoutButtonPressed(
-          token: authBloc.token,
+          token: 'authBloc.token',
         ));
       }
     }
@@ -129,7 +127,7 @@ class _SettingsViewState extends State<SettingsView> {
               //MessagingService().unsubscribeFromNotifications();
 
               // Dispatch the LoggedOut event to AuthBloc
-              BlocProvider.of<AuthBloc2>(context).add(LoggedOut());
+             // BlocProvider.of<AuthBloc>(context).add(LoggedOut());
 
 
 

@@ -24,3 +24,7 @@ class ProfessionError extends AuthState {
   final String message;
   ProfessionError(this.message);
 }
+
+class Authorized extends AuthState {}
+
+class Unauthorized extends AuthState {}

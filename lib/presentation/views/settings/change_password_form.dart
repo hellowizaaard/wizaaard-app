@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/config/theme/app_theme.dart';
-import '../../business_logic/blocs/auth_bloc/auth_bloc2.dart';
-import '../../business_logic/blocs/auth_bloc/auth_event2.dart';
-import '../../business_logic/blocs/auth_bloc/auth_state2.dart';
+import '../../../features/auth/presentation/bloc/auth_bloc.dart';
 import '../../business_logic/blocs/change_password_bloc/change_password_bloc.dart';
 import '../../business_logic/blocs/change_password_bloc/change_password_state.dart';
 import '../../../core/network/internet_cubit.dart';
@@ -86,7 +84,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
             if (state is UnAuthorized) {
               Navigator.of(context).pop();
               Future.delayed(const Duration(seconds: 1), () {
-                BlocProvider.of<AuthBloc2>(context).add(LoggedOut());
+                // BlocProvider.of<AuthBloc2>(context).add(LoggedOut());
               });
             }
           },
@@ -286,11 +284,11 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
       setState(() {
         isLoading = true; // Set loading state
       });
-      final authState = context.read<AuthBloc2>().state;
-      if (authState is AuthAuthorized) {
+      final authState = context.read<AuthBloc>().state;
+      if (authState is Authorized) {
         BlocProvider.of<ChangePasswordBloc>(context).add(
           ChangePasswordButtonPressed(
-            apiToken: authState.token,
+            apiToken: "authState.token",
             currentPassword: _currentPasswordController.text,
             newPassword: _newPasswordController.text,
           ),

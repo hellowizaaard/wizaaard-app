@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../core/config/theme/app_theme.dart';
 import '../../widgets/appbar_widget.dart';
 import '../bottom_tab_view/bottom_tabbed_view.dart';
-import '../room/room_screen.dart';
 import '../settings/settings_view.dart';
 import 'home_screen.dart';
 
@@ -28,8 +27,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   final List<Widget> screens = [
     const HomeScreen(),
-    const RoomScreen(),
-    const RoomScreen(),
+
     const SettingsView(),
   ];
 

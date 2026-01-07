@@ -29,4 +29,26 @@ class AuthRemoteDatasource {
 
     return dummyJson.map((e) => ProfessionModel.fromJson(e)).toList();
   }
+
+  // Dummy register
+  Future<bool> register(Map<String, dynamic> body) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return true; // always success
+  }
+
+  Future<bool> login(String email, String password) async {
+    await Future.delayed(const Duration(seconds: 1));
+
+    // Temporary hardcoded user
+    if (email == "test@weebird.com" && password == "123456") {
+      return true;
+    }
+    return false;
+  }
+
+  Future<bool> isLoggedIn() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    return true; // later check token or local storage
+  }
+
 }

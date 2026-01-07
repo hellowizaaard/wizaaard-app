@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:weebird_app/core/config/theme/app_theme.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:weebird_app/core/widgets/primary_button.dart';
+
+import '../../../../core/config/routes/app_router.dart';
 
 class LoginScreen extends StatefulWidget {
   final String email;
+
   const LoginScreen({super.key, required this.email});
 
   @override
@@ -20,7 +24,6 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     emailCtrl = TextEditingController(text: widget.email);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +50,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   const Text("Don't have an account? "),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRouter.onboard);
+                    },
                     child: const Text("Register now"),
                   ),
                 ],
@@ -82,19 +87,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
               SizedBox(
                 width: double.infinity,
-                height: 55,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF041C3F),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                  child: const Text(
-                    "Log in",
-                    style: TextStyle(color: Colors.white),
-                  ),
+                height: 50,
+                child: PrimaryButton(
+                  title: "Log in",
+                  route: AppRouter.home,
+                  replace: true,
+                  colorPrimary: false,
                 ),
               ),
 

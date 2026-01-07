@@ -7,7 +7,6 @@ import '../../../features/auth/presentation/bloc/auth_bloc.dart';
 import '../../business_logic/blocs/change_password_bloc/change_password_bloc.dart';
 import '../../business_logic/blocs/change_password_bloc/change_password_state.dart';
 import '../../../core/network/internet_cubit.dart';
-import '../../widgets/appbar_widget.dart';
 
 class ChangePasswordForm extends StatefulWidget {
   ChangePasswordForm({super.key});
@@ -94,7 +93,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
         builder: (context, state) {
           return Scaffold(
             resizeToAvoidBottomInset: true,
-            appBar: buildAppBar(context, title: "Change Password"),
+            //appBar: buildAppBar(context, title: "Change Password"),
             backgroundColor: Colors.white,
             body: SingleChildScrollView(
               child: Form(

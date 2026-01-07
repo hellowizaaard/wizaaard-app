@@ -5,11 +5,11 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../core/config/routes/app_router.dart';
 import '../../../core/config/theme/app_theme.dart';
+import '../../../core/widgets/settings_items.dart';
 import '../../../data/session_manager/user_prefs_manager.dart';
 import '../../../features/auth/presentation/bloc/auth_bloc.dart';
 import '../../business_logic/blocs/user_logout/user_logout_bloc.dart';
 import '../../../core/network/internet_cubit.dart';
-import '../../widgets/settings_items.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({Key? key}) : super(key: key);

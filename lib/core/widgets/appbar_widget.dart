@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
-import 'package:weebird_app/presentation/widgets/user_info.dart';
 
 import '../../core/config/theme/app_theme.dart';
 
@@ -69,14 +68,7 @@ PreferredSize buildAppBarHome(
           padding: const EdgeInsets.only(left: 16),
           child: GestureDetector(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => UserInfo(
-                        userName: userName,
-                        email: email,
-                        deptName: deptName,
-                        mobile: mobile,
-                        // projectCode: projectCode,
-                      )));
+
             },
 
           ),

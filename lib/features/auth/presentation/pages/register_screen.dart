@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../core/config/routes/app_router.dart';
 import '../../../../core/config/theme/app_theme.dart';
 import '../bloc/auth_bloc.dart';
 
@@ -17,13 +18,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String? profession;
   bool agree = false;
 
-
   @override
   void initState() {
     super.initState();
     context.read<AuthBloc>().add(LoadProfessions());
   }
-
 
   void _openProfessionSheet() {
     final searchCtrl = TextEditingController();
@@ -75,7 +74,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               return ListTile(
                                 title: Text(item.name),
                                 trailing: profession == item.name
-                                    ? const Icon(Icons.check_circle, color: Colors.blue)
+                                    ? const Icon(
+                                        Icons.check_circle,
+                                        color: Colors.blue,
+                                      )
                                     : null,
                                 onTap: () {
                                   setState(() => profession = item.name);
@@ -92,17 +94,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
               }
 
               if (state is ProfessionLoading) {
-                return const SizedBox(height: 200, child: Center(child: CircularProgressIndicator()));
+                return const SizedBox(
+                  height: 200,
+                  child: Center(child: CircularProgressIndicator()),
+                );
               }
 
-              return const SizedBox(height: 200, child: Center(child: Text("No data")));
+              return const SizedBox(
+                height: 200,
+                child: Center(child: Text("No data")),
+              );
             },
           ),
         );
       },
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +136,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Row(
                   children: [
                     const Text("Already have an account?"),
-                    TextButton(onPressed: () {}, child: const Text("Login")),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, AppRouter.onboard);
+                      },
+                      child: const Text("Login"),
+                    ),
                   ],
                 ),
 

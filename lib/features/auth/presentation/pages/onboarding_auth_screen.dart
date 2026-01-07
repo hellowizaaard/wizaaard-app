@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weebird_app/core/utils/validators.dart';
+import 'package:weebird_app/core/widgets/primary_button.dart';
 
 import '../../../../core/config/routes/app_router.dart';
 import '../../../../core/config/theme/app_theme.dart';
@@ -133,11 +134,7 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
               ),
               child: Column(
                 children: [
-                  Form(
-                    key: _formKey,
-                    child: _inputField(),
-                  ),
-
+                  Form(key: _formKey, child: _inputField()),
 
                   SizedBox(height: h * 0.02),
 
@@ -175,8 +172,8 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
           hintText: "Enter Email Address",
           border: InputBorder.none,
         ),
-        validator: Validators.email,
-      )
+        // validator: Validators.email,
+      ),
     );
   }
 
@@ -184,26 +181,23 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
     return SizedBox(
       width: double.infinity,
       height: 50,
-      child: ElevatedButton(
+      child: PrimaryButton(
+        title: "Start With Login",
         onPressed: () {
-          if (_formKey.currentState!.validate()) {
-            Navigator.pushNamed(
+          final error = Validators.email(emailCtrl.text);
+          if (error != null) {
+            ScaffoldMessenger.of(
               context,
-              AppRouter.login,
-              arguments: emailCtrl.text,
-            );
+            ).showSnackBar(SnackBar(content: Text(error)));
+            return;
           }
+          Navigator.pushNamed(
+            context,
+            AppRouter.login,
+            arguments: emailCtrl.text,
+          );
         },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColorTheme.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-        ),
-        child: const Text(
-          "Start With Login",
-          style: TextStyle(color: Colors.white),
-        ),
+        route: AppRouter.login,
       ),
     );
   }
@@ -212,16 +206,23 @@ class _OnboardingAuthScreenState extends State<OnboardingAuthScreen> {
     return SizedBox(
       width: double.infinity,
       height: 50,
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColorTheme.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-        ),
-        child: const Text("Let's Begin", style: TextStyle(color: Colors.white)),
-      ),
+
+      child: PrimaryButton(title: "Let's Begin",
+          onPressed: () {
+            final error = Validators.email(emailCtrl.text);
+            if (error != null) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(error)));
+              return;
+            }
+            Navigator.pushNamed(
+              context,
+              AppRouter.register,
+              arguments: emailCtrl.text,
+            );
+          },
+          route: AppRouter.register),
     );
   }
 

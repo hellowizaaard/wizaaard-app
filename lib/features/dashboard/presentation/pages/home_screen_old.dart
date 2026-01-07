@@ -2,18 +2,19 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import '../../../core/config/theme/app_theme.dart';
-import '../../../core/network/internet_cubit.dart';
+import '../../../../core/config/theme/app_theme.dart';
+import '../../../../core/network/internet_cubit.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key});
+class HomeScreenOld extends StatefulWidget {
+  const HomeScreenOld({Key? key});
 
   @override
-  State<HomeScreen> createState() => _MyWidgetState();
+  State<HomeScreenOld> createState() => _MyWidgetState();
 }
 
-class _MyWidgetState extends State<HomeScreen> {
+class _MyWidgetState extends State<HomeScreenOld> {
   @override
   void initState() {
     super.initState();
@@ -536,3 +537,4 @@ class _LinkText extends StatelessWidget {
     );
   }
 }
+

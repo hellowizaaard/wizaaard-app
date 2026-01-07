@@ -7,25 +7,21 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:weebird_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:weebird_app/features/auth/presentation/pages/onboarding_auth_screen.dart';
-import 'package:weebird_app/presentation/business_logic/blocs/login_bloc/login_bloc.dart';
 import 'package:weebird_app/presentation/business_logic/blocs/user_list_bloc/bloc/user_list_bloc_bloc.dart';
 import 'package:weebird_app/presentation/business_logic/blocs/user_logout/user_logout_bloc.dart';
 import 'package:weebird_app/core/network/internet_cubit.dart';
 
-import 'package:weebird_app/presentation/views/home/main_screen.dart';
-import 'package:flutter/foundation.dart' show kIsWeb, defaultTargetPlatform, TargetPlatform;
+import 'package:weebird_app/features/dashboard/presentation/pages/dashboard_screen.dart';
+import 'package:flutter/foundation.dart'
+    show kIsWeb, defaultTargetPlatform, TargetPlatform;
 
-import 'core/config/routes/app_router.dart';
 import 'core/config/routes/route_generator.dart';
 import 'core/config/theme/app_theme.dart';
 import 'data/api/api_client.dart';
 import 'data/repositories/user_list_repository.dart';
 import 'data/repositories/user_logout_repository.dart';
-import 'data/repositories/user_repository.dart';
 import 'data/session_manager/user_prefs_manager.dart';
-import 'features/auth/presentation/pages/login_screen.dart';
 import 'injection_container.dart' as di;
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,9 +36,11 @@ void main() async {
   //   return true;
   // };
   di.init();
-  runApp(MyApp(
-    //analytics: analytics,
-  ));
+  runApp(
+    MyApp(
+      //analytics: analytics,
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -58,17 +56,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-
-        BlocProvider<AuthBloc>(
-          create: (_) => di.sl<AuthBloc>(),
-        ),
+        BlocProvider<AuthBloc>(create: (_) => di.sl<AuthBloc>()),
         BlocProvider<InternetCubit>(
           create: (internetCubitContext) =>
               InternetCubit(connectivity: Connectivity()),
-        ),
-        BlocProvider<LoginBloc>(
-          create: (internetCubitContext) =>
-              LoginBloc(UserRepository(APIClient()), userPrefs),
         ),
 
         BlocProvider<UserListBlocBloc>(
@@ -80,8 +71,6 @@ class MyApp extends StatelessWidget {
           create: (blockContext) =>
               UserLogoutBloc(UserLogoutRepository(APIClient())),
         ),
-
-
       ],
       child: MaterialApp(
         title: 'WeeBird',
@@ -90,9 +79,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: MyAppStart(
-          userPrefsManager: userPrefs,
-        ),
+        home: MyAppStart(userPrefsManager: userPrefs),
       ),
     );
   }
@@ -101,10 +88,8 @@ class MyApp extends StatelessWidget {
 class MyAppStart extends StatefulWidget {
   final UserPrefsManager userPrefsManager;
 
-  const MyAppStart({
-    Key? key,
-    required this.userPrefsManager,
-  }) : super(key: key);
+  const MyAppStart({Key? key, required this.userPrefsManager})
+    : super(key: key);
 
   @override
   State<MyAppStart> createState() => _MyAppStartState();
@@ -130,10 +115,8 @@ class _MyAppStartState extends State<MyAppStart> {
 
   @override
   Widget build(BuildContext context) {
-
     const appcastURL =
         'https://raw.githubusercontent.com/larryaasen/upgrader/master/test/testappcast.xml';
-
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -143,23 +126,23 @@ class _MyAppStartState extends State<MyAppStart> {
         showIgnore: true,
         shouldPopScope: () => true,
         dialogStyle: kIsWeb
-      ? UpgradeDialogStyle.material // Choose one for web
-          : (defaultTargetPlatform == TargetPlatform.android
-      ? UpgradeDialogStyle.material
-          : UpgradeDialogStyle.cupertino),
+            ? UpgradeDialogStyle
+                  .material // Choose one for web
+            : (defaultTargetPlatform == TargetPlatform.android
+                  ? UpgradeDialogStyle.material
+                  : UpgradeDialogStyle.cupertino),
         upgrader: Upgrader(
           storeController: UpgraderStoreController(
-           // onAndroid: () => UpgraderAppcastStore(appcastURL: appcastURL, osVersion: '1.0.0'),
+            // onAndroid: () => UpgraderAppcastStore(appcastURL: appcastURL, osVersion: '1.0.0'),
           ),
           //minAppVersion: '1.0.0',
-          willDisplayUpgrade: (
-              {required display, installedVersion, versionInfo}) {
+          willDisplayUpgrade: ({required display, installedVersion, versionInfo}) {
             // Check if the current version matches the specified version
 
             if (_installedVersion != null && installedVersion != null) {
               if (_installedVersion == installedVersion) {
                 display =
-                false; // Do not display the upgrade dialog if versions match
+                    false; // Do not display the upgrade dialog if versions match
               }
             }
           },
@@ -171,26 +154,23 @@ class _MyAppStartState extends State<MyAppStart> {
         child: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
             if (state is Authorized) {
-              return MainScreen(
+              return DashboardScreen(
                 userName: 'state.userName',
                 email: 'test@gmail.com',
-                deptName: 'cse',
-                mobile: '01738039685'
-                // projectCode: state.projectCode,
               );
             }
 
             if (state is Unauthorized) {
               return OnboardingAuthScreen();
-
             }
             if (state is AuthLoading) {
               return Scaffold(
                 backgroundColor: Colors.white,
                 body: Center(
                   child: CircularProgressIndicator(
-                    valueColor:
-                    AlwaysStoppedAnimation<Color>(AppColorTheme.primary),
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      AppColorTheme.primary,
+                    ),
                   ),
                 ),
               );

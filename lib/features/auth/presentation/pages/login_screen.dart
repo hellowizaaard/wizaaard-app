@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:weebird_app/core/widgets/primary_button.dart';
 
 import '../../../../core/config/routes/app_router.dart';
+import '../../../../core/network/internet_cubit.dart';
 import '../bloc/auth_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -31,22 +32,39 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
-      listener: (context, state) {
-        if (state is Authorized) {
-          Navigator.pushReplacementNamed(context, AppRouter.home);
-        }
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<AuthBloc, AuthState>(
+          listener: (context, state) {
+            if (state is Authorized) {
+              Navigator.pushReplacementNamed(context, AppRouter.home);
+            }
 
-        if (state is AuthFailure) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.message)));
-        }
+            if (state is AuthFailure) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.message)));
+            }
 
-        if (state is AuthLoading) {
-          isLoading = true;
-        }
-      },
+            if (state is AuthLoading) {
+              isLoading = true;
+            }
+          },
+        ),
+        BlocListener<InternetCubit, InternetState>(
+          listener: (context, state) {
+            if (state is InternetDisconnected) {
+              String errorMessage = "No Internet Connection!";
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(errorMessage),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            }
+          },
+        ),
+      ],
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(

@@ -2,35 +2,38 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/cupertino.dart';
 
-import '../../constants/enums.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'internet_state.dart';
 
+enum ConnectionType { Wifi, Mobile }
+
 class InternetCubit extends Cubit<InternetState> {
   final Connectivity connectivity;
-  late StreamSubscription<ConnectivityResult> connectivityStreamSubscription;
+  late StreamSubscription<List<ConnectivityResult>>
+  connectivityStreamSubscription;
 
   InternetCubit({required this.connectivity}) : super(InternetLoading()) {
     monitorInternetConnection();
   }
 
-  StreamSubscription<ConnectivityResult> monitorInternetConnection() {
-    return connectivityStreamSubscription =
-        connectivity.onConnectivityChanged.listen((connectivityResult) {
-      if (connectivityResult == ConnectivityResult.wifi) {
+  void monitorInternetConnection() {
+    connectivityStreamSubscription = connectivity.onConnectivityChanged.listen((
+      results,
+    ) {
+      if (results.contains(ConnectivityResult.wifi)) {
         emitInternetConnected(ConnectionType.Wifi);
-      } else if (connectivityResult == ConnectivityResult.mobile) {
+      } else if (results.contains(ConnectivityResult.mobile)) {
         emitInternetConnected(ConnectionType.Mobile);
-      } else if (connectivityResult == ConnectivityResult.none) {
+      } else {
         emitInternetDisconnected();
       }
-    }) as StreamSubscription<ConnectivityResult>;
+    });
   }
 
-  void emitInternetConnected(ConnectionType _connectionType) =>
-      emit(InternetConnected(connectionType: _connectionType));
+  void emitInternetConnected(ConnectionType type) =>
+      emit(InternetConnected(connectionType: type));
 
   void emitInternetDisconnected() => emit(InternetDisconnected());
 

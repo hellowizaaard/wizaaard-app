@@ -1,4 +1,3 @@
-import 'package:http/http.dart' as http;
 import '../models/profession_model.dart';
 
 class AuthRemoteDatasource {

@@ -91,6 +91,7 @@ flutter:
     - assets/icons/ic_notification.svg
     - assets/icons/app_logo.png
     - assets/icons/ic_profile.png
+    - assets/icons/profile_img.jpg
 
     - assets/onboard/onboard_1.svg
     - assets/onboard/onboard_2.svg

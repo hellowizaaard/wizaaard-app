@@ -56,12 +56,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(Unauthorized());
     });
 
-    // PrimaryButton(
-    //   title: "Logout",
-    //   onPressed: () {
-    //     context.read<AuthBloc>().add(LogoutRequested());
-    //   },
-    // ),
 
 
   }

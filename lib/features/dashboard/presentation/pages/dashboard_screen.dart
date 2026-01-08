@@ -4,6 +4,7 @@ import 'package:weebird_app/features/settings/presentation/pages/settings_tab.da
 import '../../../../core/config/theme/app_theme.dart';
 import '../../../../presentation/views/bottom_tab_view/bottom_tabbed.dart';
 import '../../../../presentation/views/settings/settings_view.dart';
+import '../../../resume/presentation/pages/resume_profile_tab.dart';
 import 'home_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -23,7 +24,7 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   final List<Widget> screens = [
     const HomeScreen(),
-    const SettingsView(),
+    const ResumeProfileTab(),
     const NotificationsTab(),
     const SettingsTab(),
   ];

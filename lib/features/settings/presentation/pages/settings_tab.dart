@@ -1,39 +1,74 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weebird_app/core/widgets/primary_button.dart';
+
+import '../../../../core/config/routes/app_router.dart';
+import '../../../../core/network/internet_cubit.dart';
+import '../../../auth/presentation/bloc/auth_bloc.dart';
 
 class SettingsTab extends StatelessWidget {
   const SettingsTab({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: const Color(0xFFF6F7FB),
-        body: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            _header(),
-            _profileCard(),
-            _section("Profile Settings", [
-              "Basic Information",
-              "Profile Photo",
-              "Username",
-              "Account Actions",
-            ]),
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<AuthBloc, AuthState>(
+          listener: (context, state) {
+            if (state is Unauthorized) {
+              Navigator.pushReplacementNamed(context, AppRouter.onboard);
+            }
 
-            _section("Billing & Payments", [
-              "Premium Plans",
-              "Payment Methods",
-              "Billing History",
-            ]),
-            _section("Notifications", [
-              "Email Notifications",
-              "Activity Notifications",
-              "Security Alerts",
-              "System Notifications",
-            ]),
-          ],
+            if (state is AuthFailure) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.message)));
+            }
+          },
+        ),
+        BlocListener<InternetCubit, InternetState>(
+          listener: (context, state) {
+            if (state is InternetDisconnected) {
+              String errorMessage = "No Internet Connection!";
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(errorMessage),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            }
+          },
+        ),
+      ],
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: const Color(0xFFF6F7FB),
+          body: ListView(
+            padding: const EdgeInsets.all(16),
+            children: [
+              _header(),
+              _profileCard(context),
+              _section("Profile Settings", [
+                "Basic Information",
+                "Profile Photo",
+                "Username",
+                "Account Actions",
+              ]),
+
+              _section("Billing & Payments", [
+                "Premium Plans",
+                "Payment Methods",
+                "Billing History",
+              ]),
+              _section("Notifications", [
+                "Email Notifications",
+                "Activity Notifications",
+                "Security Alerts",
+                "System Notifications",
+              ]),
+            ],
+          ),
         ),
       ),
     );
@@ -66,7 +101,7 @@ class SettingsTab extends StatelessWidget {
     );
   }
 
-  Widget _profileCard() {
+  Widget _profileCard(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(14),
       margin: const EdgeInsets.only(bottom: 20),
@@ -111,7 +146,9 @@ class SettingsTab extends StatelessWidget {
 
                 PrimaryButton(
                   title: "Go Premium",
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<AuthBloc>().add(LogoutRequested());
+                  },
                   colorPrimary: false,
                 ),
               ],
@@ -128,10 +165,7 @@ class SettingsTab extends StatelessWidget {
       children: [
         Text(
           title,
-          style: GoogleFonts.poppins(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
+          style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 8),
 
@@ -144,11 +178,8 @@ class SettingsTab extends StatelessWidget {
             itemCount: items.length,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            separatorBuilder: (_, __) => Divider(
-              height: 1,
-              thickness: 1,
-              color: Colors.grey.shade200,
-            ),
+            separatorBuilder: (_, __) =>
+                Divider(height: 1, thickness: 1, color: Colors.grey.shade200),
             itemBuilder: (_, i) {
               return ListTile(
                 title: Text(items[i]),
